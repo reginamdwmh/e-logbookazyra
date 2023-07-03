@@ -20,4 +20,11 @@ class ContactController extends Controller
                 ->get();
         return view ('admin.contact',['users' => $users]);
     }
+
+    public function public()
+    {
+        $users = UsersModel::select('*')
+                ->get();
+        return view ('public.contact',['users' => $users]);
+    }
 }

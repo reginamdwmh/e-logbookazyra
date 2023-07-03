@@ -25,6 +25,13 @@ class DashboardController extends Controller
         return view('admin.index',['users' => $users]);
     }
     
+    public function public()
+    {
+        $users = UsersModel::select('*')
+                 ->get();
+        return view('public.index',['users' => $users]);
+    }
+    
     // public function ubahprofile($id)
     // {
     //     $users = UsersModel::select('*')

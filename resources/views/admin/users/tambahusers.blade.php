@@ -17,15 +17,15 @@
               @csrf
               <div class="form-group">
                 <label>Nama</label>
-                <input type="text" name="name" class="form-control" placeholder="Nama" required="">
+                <input type="text" name="name" class="form-control" placeholder="Nama" required>
               </div>
               <div class="form-group">
                 <label>Email</label>
-                <input type="text" name="email" class="form-control" placeholder="Email" required="">
+                <input type="text" name="email" class="form-control" placeholder="Email" required>
               </div>
               <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="pass" name="password" class="form-control" placeholder="Password" required="">
+                <input type="password" id="pass" name="password" class="form-control" placeholder="Password" required>
                 <input id="mybutton" onclick="change()" type="checkbox" class="form-checkbox"> Lihat Password
               </div>
               <div class="form-group">
@@ -34,6 +34,7 @@
                   <option>- Pilih -</option>
                   <option>admin</option>
                   <option>user</option>
+                  <option>public</option>
                 </select>
               </div>
               <div class="form-group text-right">

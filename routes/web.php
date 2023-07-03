@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanStokController;
 use App\Http\Controllers\TransaksiAlatController;
@@ -44,6 +45,8 @@ Route::get('/', function () {
 
 // Route::get('transaksi_alat',['transaksi_alat'=>'LaporanDataAlatController@search','as'=>'Laporan.LaporanDataAlat.index']);
 Route::get('/login',[LoginController::class,'index']);
+Route::get('/register',[RegisterController::class,'index']);
+Route::post('/register',[RegisterController::class,'simpanregis'])->name('simpanregis');
 Route::post('/login',[LoginController::class,'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -230,8 +233,10 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     
 });
 
+Route::group(['middleware' => ['auth', 'role:public']], function () {
+    Route::get('/public',[DashboardController::class,'public']);
+    Route::get('/public/contact',[ContactController::class,'public']);
 
-
-
+});
 
 

@@ -17,6 +17,8 @@ class LoginController extends Controller
                 return redirect()->intended('admin');
             } elseif ($user->role === 'user') {
                 return redirect()->intended('user');
+            } elseif ($user->role === 'public') {
+                return redirect()->intended('public');
             }
         }
 
@@ -63,6 +65,8 @@ class LoginController extends Controller
                 return redirect()->intended('/admin');
             } elseif ($user->role === 'user') {
                 return redirect()->intended('/dashboard');
+            } elseif ($user->role === 'public') {
+                return redirect()->intended('/public');
             }
         }
 

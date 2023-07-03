@@ -28,53 +28,36 @@
 			
 			<div class="card-head" align="center">
 			<a href="#">
-				<img src="{{ asset('assets/AdminLTE/dist/img/azyra.png')}}" width="180px" height="160px" /><br>
 				<font color="grey" size="6"> 
-					<b>LOGIN</b>
+					<b>Daftar</b>
 				</font>
 			</a>
 			</div>
 			<div class="card-body">				
-				<form action="/login" method="post">
-					@csrf 
-					<div class="input-group mb-3">
-						<input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="name@example.com" id="email" autofocus required value="{{ old('email') }}">
-						<div class="input-group-append">
-							<div class="input-group-text">
-								<span class="fas fa-user"></span>
-							</div>
-						</div>
-						@error('email')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
+				<form method="post" action="{{route('simpanregis')}}">
+					@csrf
+					<div class="form-group">
+					  <label>Nama</label>
+					  <input type="text" name="name" class="form-control" placeholder="Nama" required>
 					</div>
-
-					<div class="input-group mb-3">
-						<input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password" required>
-						<div class="input-group-append">
-							<div class="input-group-text">
-								<span class="fas fa-lock"></span>
-							</div>
-						</div>
-						@error('password')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
+					<div class="form-group">
+					  <label>Email</label>
+					  <input type="text" name="email" class="form-control" placeholder="Email" required>
 					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<button class="w-100 btn-lg btn-success" type="submit">
-							 	<b>Masuk</b>
-							 </button>
-						</div>
+					<div class="form-group">
+					  <label>Password</label>
+					  <input type="password" id="pass" name="password" class="form-control" placeholder="Password" required>
+					  <input id="mybutton" onclick="change()" type="checkbox" class="form-checkbox"> Lihat Password
 					</div>
-					<br>
-					<p class="card-subtitle" align="center">Baru Di Azyra?<span><a href="/register/" class="card-link"> Register</a></span></p>
-				</form>
+					<div class="form-group" style="display: none">
+					  <label>Role</label>
+					  <input type="text" name="role" class="form-control" placeholder="role" value="public" >
+					</div>
+					<div class="form-group text-right">
+						<button class="w-100 btn-lg btn-success" type="submit"><b>Daftar</b></button>
+					</div>
+					<p class="card-subtitle" align="center"><span><a href="/login/" class="card-link">Kembali</a></span></p>
+				  </form>
 			</div>
 		</div>
 	</div>
@@ -88,6 +71,21 @@
 	<script src="{{ asset('assets/AdminLTE/dist/js/adminlte.min.js')}}"></script>
 	<!-- Alert -->
 	<script src="{{ asset('assets/AdminLTE/plugins/alert.js')}}"></script>
+
+	<script type="text/javascript">
+		function change() {
+			var x = document.getElementById('pass').type;
+	
+			if (x == 'password') {
+				document.getElementById('pass').type = 'text';
+				document.getElementById('mybutton').innerHTML;
+			} else {
+				document.getElementById('pass').type = 'password';
+				document.getElementById('mybutton').innerHTML;
+			}
+		}
+	</script>
+	
 
 	@include('sweetalert::alert')
 </body>
