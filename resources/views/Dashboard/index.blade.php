@@ -5,8 +5,7 @@
 <section class="content">
 <center>
     <img src="{{ asset('assets/AdminLTE/dist/img/azyra.png')}}" width="150px" height="150px" /> <br>
-    <font size="6" face="Helvetica">LogBook</font><br>
-    <font size="6">UMKM Azyra</font><br><br>
+    <font size="5" face="Helvetica">APLIKASI LOG BOOK PENJUALAN,GRAFIK BARANG TERLARIS DAN INVENTARIS BARANG PADA AZYRA SNACK N FOOD BANJARBARU</font><br>
 </center>
 <div class="card card-danger">
     <div class="card-header">

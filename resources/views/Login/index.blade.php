@@ -18,9 +18,9 @@
 	<link rel="stylesheet" href="{{ asset('assets/AdminLTE/dist/css/adminlte.min.css')}}">
 	<!-- Google Font : Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
 </head>
-<body class="hold-transition login-page bg-gradient-danger">
+<body class="hold-transition login-page bg-gradient-grey">
+	
 	
 	<div class="login-box">
 		<!--/.Login-Logo -->
@@ -28,8 +28,9 @@
 			
 			<div class="card-head" align="center">
 			<a href="#">
-				<font color="black">
-					<b>APLIKASI LOG BOOK PENJUALAN,GRAFIK BARANG TERLARIS DAN INVENTARIS BARANG PADA AZYRA SNACK N FOOD BANJARBARU</b>
+				<img src="{{ asset('assets/AdminLTE/dist/img/azyra.png')}}" width="150px" height="150px" /><br>
+				<font color="black" size="6"> 
+					<b>LOGIN</b>
 				</font>
 			</a>
 			</div>
