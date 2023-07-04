@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PesanController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RegisterController;
@@ -236,6 +237,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 Route::group(['middleware' => ['auth', 'role:public']], function () {
     Route::get('/public',[DashboardController::class,'public']);
     Route::get('/public/contact',[ContactController::class,'public']);
+    Route::get('/public/pesan/{id_makanan}',[PesanController::class,'index'])->name('index');
 
 });
 

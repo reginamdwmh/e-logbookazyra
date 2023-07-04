@@ -12,7 +12,7 @@
                     <div class="card-body">
                     <h5 class="card-title">{{ $m->nama_makanan }}</h5>
                     <p class="card-text">@currency($m->harga)</p>
-                    <a href="#" class="btn btn-primary"> <i class="fas fa-shopping-cart"></i> Pesan</a>
+                    <a href="/public/pesan/{{ $m->id_makanan }}" class="btn btn-primary"> <i class="fas fa-shopping-cart"></i> Pesan</a>
                     </div>
                 </div>
             </div>
