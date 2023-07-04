@@ -39,11 +39,28 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-beer"></i>
+            <i class="nav-icon fas fa-chart-pie"></i>
             <p>
-              Makanan & Minuman
+              Produk
+              <i class="fas fa-angle-right right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Makanan & Minuman</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Frozen Food</p>
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">

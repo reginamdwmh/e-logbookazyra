@@ -7,6 +7,7 @@ use App\Models\DashboardModel;
 use Illuminate\Http\Request;
 use PhpParser\Node\NullableType;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\MasterDataMakananModel;
 
 
 class DashboardController extends Controller
@@ -29,7 +30,9 @@ class DashboardController extends Controller
     {
         $users = UsersModel::select('*')
                  ->get();
-        return view('public.index',['users' => $users]);
+        $makanan = MasterDataMakananModel::select('*')
+                 ->get();
+        return view('public.index',['users' => $users,'makanan' => $makanan]);
     }
     
     // public function ubahprofile($id)
