@@ -28,22 +28,20 @@
                                         <td>:</td>
                                         <td></td>
                                     </tr>
-                                    <form action="">
+                                    
                                     <tr>
                                         <td>Jumlah Pesanan</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="number" name="jumlah_pesanan" class="form-control" required>
+                                            <form method="post" action="">
+                                            @csrf
+                                                <input type="number" name="jumlah_pesanan" class="form-control" required>
+                                                <button type="submit" class="btn btn-primary mt-2"><i class="fas fa-shopping-cart"></i> Masukan Chart</button>
+                                            </form>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Masukan Chart</button>
-                                        </td>
-                                    </tr>
-                                    </form>
+                                   
+                                    
                                 </tbody>
                             </table>
                         </div>

@@ -22,4 +22,5 @@ class PesanController extends Controller
 
         return view('public.pesan.index', compact('makanan','users'));
     }
+
 }
