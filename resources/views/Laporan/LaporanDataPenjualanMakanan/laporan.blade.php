@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
-    <title>Data Transaksi Penjualan Makanan</title>
+    <title>Data Transaksi Penjualan Makanan Offline</title>
 </head>
     {{-- <style type="text/css">
         body{
@@ -106,7 +106,7 @@
         <br>
 
         <div style="text-align: center;">
-            <font size="5"><b>LAPORAN DATA TRANSAKSI PENJUALAN MAKANAN</b></font><br>
+            <font size="5"><b>LAPORAN DATA TRANSAKSI PENJUALAN MAKANAN OFFLINE</b></font><br>
         </div>
 
             <br>

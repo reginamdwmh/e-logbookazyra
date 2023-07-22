@@ -31,6 +31,10 @@
                   <input id="mybutton" onclick="change()" type="checkbox" class="form-checkbox"> Lihat Password
                 </div>
                 <div class="form-group">
+                  <label>Alamat</label>
+                  <textarea name="alamat" class="form-control" placeholder="Alamat" required>{{ $u->alamat }}</textarea>
+              </div>
+                <div class="form-group">
                   <label>Role</label>
                   <select name="role" id="role" class="form-control">
                     <option>- Pilih -</option>                 

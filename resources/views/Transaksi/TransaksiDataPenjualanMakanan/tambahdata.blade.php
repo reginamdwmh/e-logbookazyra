@@ -87,7 +87,7 @@
         <div class="card-header">
             <h5 class="card-title">
                 <i class="fa fa-edit"></i>
-                Tambah Data Transaksi Penjualan Makanan
+                Tambah Data Transaksi Penjualan Makanan Offline
             </h5>
         </div>
         <div class="card-body">

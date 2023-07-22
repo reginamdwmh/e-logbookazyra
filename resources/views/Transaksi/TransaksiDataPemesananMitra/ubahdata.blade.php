@@ -7,26 +7,26 @@
         <div class="card-header">
             <h5 class="card-title">
               <i class="fa fa-edit"></i>
-              Ubah Data Transaksi Pemesanan Online
+              Ubah Data Transaksi Pemesanan Mitra
             </h5>
         </div>
         <div class="card-body">
           <div class="table-responsive">
           <table class="table table-bordered table-hover">
-            @foreach($transaksi_pemesanan_online as $tpo)
-              <form method="post" action="{{route('updatepemesananonline')}}">
+            @foreach($transaksi_pemesanan_mitra as $tpo)
+              <form method="post" action="{{route('updatepemesananmitra')}}">
                 @csrf
-                <input type="hidden" name="id_online" value="{{$tpo->id_online}}">
+                <input type="hidden" name="id_mitra" value="{{$tpo->id_mitra}}">
                 <div class="row g-3">
                   <div class="col-sm-4">
                   <label>Keterangan_Pemesanan</label>
                   <select name="keterangan_pemesanan" id="keterangan_pemesanan" class="form-control">
                     <option value="">-Pilih-</option>
-                    @foreach($online as $o)
-                    @if(old('keterangan_pemesanan', $tpo->keterangan_pemesanan == $o->keterangan_pemesanan))
-                    <option value="{{ $o->keterangan_pemesanan }}" selected>{{$o->keterangan_pemesanan}}</option>
+                    @foreach($mitra as $m)
+                    @if(old('keterangan_pemesanan', $tpo->keterangan_pemesanan == $m->keterangan_pemesanan))
+                    <option value="{{ $m->keterangan_pemesanan }}" selected>{{$m->keterangan_pemesanan}}</option>
                     @else
-                     <option value="{{ $o->keterangan_pemesanan }}" data-biaya_admin="{{$o->biaya_admin}}" data-ongkir="{{$o->ongkir}}">{{$o->keterangan_pemesanan}}</option>
+                     <option value="{{ $m->keterangan_pemesanan }}" data-biaya_admin="{{$m->biaya_admin}}" data-ongkir="{{$m->ongkir}}">{{$m->keterangan_pemesanan}}</option>
                     @endif
                     @endforeach
                   </select>
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="form-group text-right">
-                  <a href="/transaksi/data-pemesanan-online" title="Kembali" class="btn btn-primary"><i class="fa fa-back"></i>Kembali</a>
+                  <a href="/transaksi/data-pemesanan-mitra" title="Kembali" class="btn btn-primary"><i class="fa fa-back"></i>Kembali</a>
                   <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Update Data</button>
                 </div>
               </form>

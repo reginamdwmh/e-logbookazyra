@@ -54,6 +54,7 @@
 <script src="{{ asset ('assets/AdminLTE/plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
 <script src="{{ asset ('assets/AdminLTE/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
 
+<script src="{{ asset ('assets/gstatic.com_charts_loader.js')}}"></script>
 <script>
   $(function() {
     $("#example1").DataTable();

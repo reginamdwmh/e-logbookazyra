@@ -19,11 +19,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Nama Alat</th>
-                            <th>Stok Masuk</th>
-                            <th>Stok Keluar</th>
-                            <th>Sisa</th>
+                            <th><center>Stok Masuk</center></th>
+                            <th><center>Stok Keluar</center></th>
+                            <th><center>Sisa</center></th>
                         </tr>
                     
                     </thead>
@@ -37,11 +37,11 @@
                          $sisa = $s->stok_masuk - $s->stok_keluar;  
                         @endphp
                         <tr>
-                            <td>{{$no++}}</td>
+                            <td><center>{{$no++}}</center></td>
                             <td>{{ $s->nama_alat }}</td>
-                            <td>{{ $s->stok_masuk }}</td>
-                            <td>{{ $s->stok_keluar }}</td>
-                            <td>{{ $sisa }}</td>
+                            <td><center>{{ $s->stok_masuk }}</center></td>
+                            <td><center>{{ $s->stok_keluar }}</center></td>
+                            <td><center>{{ $sisa }}</center></td>
                         </tr>
                         @endforeach
                     </tbody>

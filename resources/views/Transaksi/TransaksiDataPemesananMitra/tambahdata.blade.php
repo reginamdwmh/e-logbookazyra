@@ -7,21 +7,21 @@
         <div class="card-header">
             <h5 class="card-title">
                 <i class="fa fa-edit"></i>
-                Tambah Data Transaksi Pemesanan Online
+                Tambah Data Transaksi Pemesanan Mitra
             </h5>
         </div>
         <div class="card-body">
           <div class="table-responsive">
           <table class="table table-bordered table-hover">
-            <form method="post" action="{{route('simpanpemesananonline')}}" >
+            <form method="post" action="{{route('simpanpemesananmitra')}}" >
               @csrf
               <div class="row g-3">
                 <div class="col-sm-4">
                 <label>Keterangan Pemesanan</label>
                 <select name="keterangan_pemesanan" id="keterangan_pemesanan" class="form-control" required>
                   <option value="">-Pilih-</option>
-                  @foreach ($transaksi_pemesanan_online as $tpo)
-                  <option value="{{ $tpo->keterangan_pemesanan }}" data-biaya_admin="{{$tpo->biaya_admin}}" data-ongkir="{{$tpo->ongkir}}">{{$tpo->keterangan_pemesanan}}</option>
+                  @foreach ($transaksi_pemesanan_mitra as $tpm)
+                  <option value="{{ $tpm->keterangan_pemesanan }}" data-biaya_admin="{{$tpm->biaya_admin}}" data-ongkir="{{$tpm->ongkir}}">{{$tpm->keterangan_pemesanan}}</option>
                   @endforeach
                 </select>
               </div>

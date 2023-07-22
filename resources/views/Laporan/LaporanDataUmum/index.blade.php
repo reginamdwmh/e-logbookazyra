@@ -40,13 +40,13 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Nama Makanan</th>
-                            <th>Harga</th>
-                            <th>Penjualan</th>
-                            <th>Mitra</th>
-                            <th>Total Penjualan</th>
-                            <th>Tanggal</th>
+                            <th><center>Harga</center></th>
+                            <th><center>Penjualan</center></th>
+                            <th><center>Mitra</center></th>
+                            <th><center>Total Penjualan</center></th>
+                            <th><center>Tanggal</center></th>
                         </tr>
                     
                     </thead>
@@ -57,11 +57,11 @@
                         @endphp
                           @foreach($transaksi_umum as $tu) 
                           <tr>
-                              <td>{{$no++}}</td>
+                              <td><center>{{$no++}}</center></td>
                               <td>{{$tu->nama_makanan}}</td>
-                              <td>@currency($tu->harga)</td>
-                              <td>{{$tu->jumlah_penjualan}}</td>
-                              <td>
+                              <td><center>@currency($tu->harga)</center></td>
+                              <td><center>{{$tu->jumlah_penjualan}}</center></td>
+                              <td><center>
                                 <ul>
                                     @foreach ( $tu->get_transaksiumumdetail as $tud)
                                         <li>{{$tud->keterangan_pemesanan}} : {{$tud->jumlah_pemesanan}}</li>
@@ -69,9 +69,9 @@
                                     
                             
                                 </ul>
-                            </td>
-                              <td>@currency($tu->total)</td>
-                              <td>{{$tu->created_at->format('d F Y')}}</td>
+                            </center></td>
+                              <td><center>@currency($tu->total)</center></td>
+                              <td><center>{{$tu->created_at->format('d F Y')}}</center></td>
                               
                           </tr>
                           @endforeach

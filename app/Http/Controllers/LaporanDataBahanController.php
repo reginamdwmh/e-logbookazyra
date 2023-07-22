@@ -37,8 +37,18 @@ class LaporanDataBahanController extends Controller
         $tglawal = date('Y-m-d', strtotime($tglawal));
         $tglakhir = date('Y-m-d', strtotime($tglakhir));     
         $tanggal = TransaksiBahanModel::wherebetween(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"),[$tglawal, $tglakhir])->get();
-        $pdf = PDF::loadView('Laporan.LaporanDataBahan.laporan', ['tanggal' => $tanggal,'users' => $users],compact('tglawal','tglakhir'));
-        return $pdf->stream('Laporan-Data-Transaksi-Bahan.pdf');    
+
+        $user = Auth::user();
+        if ($user->role == 'admin') {
+            $pdf = PDF::loadView('admin.Laporan.LaporanDataBahan.laporan', ['tanggal' => $tanggal,'users' => $users],compact('tglawal','tglakhir'));
+            return $pdf->stream('Laporan-Data-Transaksi-Bahan.pdf');
+        } else {
+
+            $pdf = PDF::loadView('Laporan.LaporanDataBahan.laporan', ['tanggal' => $tanggal,'users' => $users],compact('tglawal','tglakhir'));
+            return $pdf->stream('Laporan-Data-Transaksi-Bahan.pdf');
+        }
+
+           
     }
 
     

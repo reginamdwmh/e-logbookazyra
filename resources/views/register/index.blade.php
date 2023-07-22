@@ -45,9 +45,9 @@
 					  <input type="text" name="email" class="form-control" placeholder="Email" required>
 					</div>
 					<div class="form-group">
-					  <label>Password</label>
-					  <input type="password" id="pass" name="password" class="form-control" placeholder="Password" required>
-					  <input id="mybutton" onclick="change()" type="checkbox" class="form-checkbox"> Lihat Password
+						<label>Password</label>
+						<input type="password" id="pass" name="password" class="form-control" placeholder="Password" required>
+						<input id="mybutton" onclick="change()" type="checkbox" class="form-checkbox"> Lihat Password
 					</div>
 					<div class="form-group" style="display: none">
 					  <label>Role</label>

@@ -20,11 +20,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Keterangan</th>
-                            <th>Biaya Admin</th>
-                            <th>Ongkir</th>
-                            <th>Aksi</th>
+                            <th><center>Biaya Admin</center></th>
+                            <th><center>Ongkir</center></th>
+                            <th><center>Aksi</center></th>
                         </tr>
                     
                     </thead>
@@ -35,15 +35,15 @@
                         @endphp
                          @foreach($pemesanan as $p) 
                          <tr>
-                             <td>{{$no++}}</td>
+                             <td><center>{{$no++}}</center></td>
                              <td>{{$p->keterangan_pemesanan}}</td>
-                             <td>{{$p->biaya_admin}}%</td>
-                             <td>@currency($p->ongkir)</td>
-                             <td>
+                             <td><center>{{$p->biaya_admin}}%</center></td>
+                             <td><center>@currency($p->ongkir)</center></td>
+                             <td><center>
                              {{-- <a href="/master-data/data-pemesanan/lihat/{{$p->id_pemesanan}}" title="Lihat" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> --}}
                              <a href="/master-data/data-pemesanan/ubah/{{$p->id_pemesanan}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                              <a href="/master-data/data-pemesanan/hapus/{{$p->id_pemesanan}}" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');" title="Hapus" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                             </td>
+                            </center></td>
                          </tr>
              
                          @endforeach

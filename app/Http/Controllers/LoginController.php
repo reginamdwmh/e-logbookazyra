@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Models\MasterDataMakananModel;
 
 class LoginController extends Controller
 {
@@ -87,6 +87,9 @@ class LoginController extends Controller
         $request->session()->flush();
         Auth::logout();
         Alert::success('Success', 'Anda Berhasil Logout');
-        return redirect('/login');
+        $makanan = MasterDataMakananModel::select('*')
+            ->get();
+        return view('public.index', ['makanan' => $makanan]);
+        // return redirect('/login');
     }
 }

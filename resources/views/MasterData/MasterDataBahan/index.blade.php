@@ -20,10 +20,10 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Nama</th>
-                            <th>Harga</th>
-                            <th>Aksi</th>
+                            <th><center>Harga</center></th>
+                            <th><center>Aksi</center></th>
                         </tr>
                     
                     </thead>
@@ -34,14 +34,14 @@
                         @endphp
                          @foreach($bahan as $b) 
                          <tr>
-                             <td>{{ $no++}}</td>             
+                             <td><center>{{ $no++}}</center></td>             
                              <td>{{$b->nama_bahan}}</td>
-                             <td>@currency($b->harga) </td>
-                             <td>
+                             <td><center>@currency($b->harga) </center></td>
+                             <td><center>
                             {{-- <a href="/master-data/data-bahan/lihat/{{$b->id_bahan}}" title="Lihat" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> --}}
                              <a href="/master-data/data-bahan/ubah/{{$b->id_bahan}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                              <a href="/master-data/data-bahan/hapus/{{$b->id_bahan}}" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');" title="Hapus" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                             </td>
+                            </center></td>
                          </tr>
              
                          @endforeach

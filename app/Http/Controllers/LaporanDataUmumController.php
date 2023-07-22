@@ -37,7 +37,17 @@ class LaporanDataUmumController extends Controller
         $tglawal = date('Y-m-d', strtotime($tglawal));
         $tglakhir = date('Y-m-d', strtotime($tglakhir));
         $tanggal = TransaksiUmum::with('get_transaksiumumdetail')->wherebetween(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), [$tglawal, $tglakhir])->get();
-        $pdf = PDF::loadView('Laporan.LaporanDataUmum.laporan', ['tanggal' => $tanggal,'users' => $users],compact('tglawal','tglakhir'));
-        return $pdf->stream('Laporan-Data-Transaksi-Umum.pdf');    
+
+        $user = Auth::user();
+        if ($user->role == 'admin') {
+            $pdf = PDF::loadView('admin.Laporan.LaporanDataUmum.laporan', ['tanggal' => $tanggal,'users' => $users],compact('tglawal','tglakhir'));
+            return $pdf->stream('Laporan-Data-Transaksi-Umum.pdf');
+        } else {
+
+            $pdf = PDF::loadView('Laporan.LaporanDataUmum.laporan', ['tanggal' => $tanggal,'users' => $users],compact('tglawal','tglakhir'));
+            return $pdf->stream('Laporan-Data-Transaksi-Umum.pdf');
+        }
+
+           
     }
 }

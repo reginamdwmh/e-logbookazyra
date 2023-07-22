@@ -41,6 +41,8 @@
 
     <!-- Main content -->
     @yield('content')
+    @include('layouts.backend-public.modal')
+    
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

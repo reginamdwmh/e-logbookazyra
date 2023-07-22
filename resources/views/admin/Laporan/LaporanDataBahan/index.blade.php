@@ -40,12 +40,12 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Nama Bahan</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>Total</th>
-                            <th>Tanggal</th>
+                            <th><center>Harga</center></th>
+                            <th><center>Jumlah</center></th>
+                            <th><center>Total</center></th>
+                            <th><center>Tanggal</center></th>
                         </tr>
                     
                     </thead>
@@ -56,12 +56,12 @@
                         @endphp
                           @foreach($transaksi_bahan as $tb) 
                           <tr>
-                              <td>{{$no++}}</td>
+                              <td><center>{{$no++}}</center></td>
                               <td>{{$tb->nama_bahan}}</td>
-                              <td>@currency($tb->harga)</td>
-                              <td>{{$tb->jumlah}}</td>
-                              <td>@currency($tb->total)</td>
-                              <td>{{$tb->created_at->format('d F Y')}}</td>
+                              <td><center>@currency($tb->harga)</center></td>
+                              <td><center>{{$tb->jumlah}}</center></td>
+                              <td><center>@currency($tb->total)</center></td>
+                              <td><center>{{$tb->created_at->format('d F Y')}}</center></td>
                               
                           </tr>
                           @endforeach

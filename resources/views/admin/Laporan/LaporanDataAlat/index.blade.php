@@ -1,4 +1,4 @@
-@extends('layouts.backend-admin.app')
+@extends('layouts.backend-dashboard.app')
 @section('title')
 
 @section('content')
@@ -26,15 +26,6 @@
                         <input type="date" name="tglakhir" id="tglakhir" class="form-control">
                         
                     </div>
-                    {{-- <div class="col-md-4">
-                        <label for="label">Nama Alat</label>
-                        <select id="filter-nama-alat" class="form-control filter">
-                            <option value="">-Pilih Nama Alat-</option>
-                            @foreach ($transaksi_alat as $ta)
-                                <option value="{{ $ta->nama_alat }}">{{ $ta->nama_alat }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <a href="#" onclick="this.href='/admin/laporan/data-alat/cetak/'+document.getElementById('tglawal').value +
@@ -51,12 +42,12 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Nama Alat</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>Total</th>
-                            <th>Tanggal</th>
+                            <th><center>Harga</center></th>
+                            <th><center>Jumlah</center></th>
+                            <th><center>Total</center></th>
+                            <th><center>Tanggal</center></th>
                         </tr>
                     
                     </thead>
@@ -67,61 +58,19 @@
                         @endphp
                           @foreach($transaksi_alat as $tb) 
                           <tr>
-                              <td>{{$no++}}</td>
+                              <td><center>{{$no++}}</center></td>
                               <td>{{$tb->nama_alat}}</td>
-                              <td>@currency($tb->harga)</td>
-                              <td>{{$tb->jumlah}}</td>
-                              <td>@currency($tb->total)</td>
-                              <td>{{$tb->created_at->format('d F Y')}}</td>
+                              <td><center>@currency($tb->harga)</center></td>
+                              <td><center>{{$tb->jumlah}}</center></td>
+                              <td><center>@currency($tb->total)</center></td>
+                              <td><center>{{$tb->created_at->format('d F Y')}}</center></td>
                               
                           </tr>
                           @endforeach
-                 
+                   
                 </table>
             </div>
         </div> 
-
-
-
-        {{-- <script src="{{ asset ('assets/AdminLTE/plugins/jQuery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
-        <script src="{{ asset ('assets/AdminLTE/plugins/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
-        <script src="{{ asset ('assets/AdminLTE/plugins/jquery-datatable/extensions/export/jszip.min.js')}}"></script>
-        <script src="{{ asset ('assets/AdminLTE/plugins/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
-        <script src="{{ asset ('assets/AdminLTE/plugins/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
-        <script src="{{ asset ('assets/AdminLTE/plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
-        <script src="{{ asset ('assets/AdminLTE/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-        
-        <script type="text/javascript">
-        let nama_alat = $("#filter-nama-alat").val()
-        $(function() {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-              "paging": true,
-              "lengthChange": false,
-              "searching": false,
-              "ordering": true,
-              "info": true,
-              "autoWidth": false,
-              ajax:{
-                url:"{{ route('index') }}",
-                type: "POST",
-                data: function (d) {
-                    d.nama_alat = nama_alat;
-                    return d
-                }
-              }
-            });
-          });
-
-
-
-        $(".filter").on('change', function(){
-                nama_alat = $("#filter-nama-alat").val()
-                table.ajax.reload(null,false)
-            })
-        </script> --}} 
                   
 </section>
 @endsection

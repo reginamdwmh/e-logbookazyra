@@ -6,7 +6,7 @@
     <div class="card card-danger">
         <div class="card-header">
             <h3 class="card-title">
-                <i class="fa fa-table"></i> Laporan Data Transaksi Pemesanan Online
+                <i class="fa fa-table"></i> Laporan Data Transaksi Pemesanan Mitra
             </h3>
         </div>
         <!-- /.card-header -->
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <a href="#" onclick="this.href='/admin/laporan/data-pemesanan-online/cetak/'+document.getElementById('tglawal').value +
+                        <a href="#" onclick="this.href='/admin/laporan/data-pemesanan-mitra/cetak/'+document.getElementById('tglawal').value +
                         '/' + document.getElementById('tglakhir').value" target="_blank" class="btn btn-primary">
                         <i class="fa fa-print"></i>Cetak</a>
                     </div>
@@ -38,12 +38,12 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Kode Pemesanan</th>
                             <th>Keterangan Pemesanan</th>
-                            <th>Komisi</th>
-                            <th>Pendapatan</th>
-                            <th>Tanggal</th>
+                            <th><center>Komisi</center></th>
+                            <th><center>Pendapatan</center></th>
+                            <th><center>Tanggal</center></th>
                         </tr>
                     
                     </thead>
@@ -52,14 +52,14 @@
                         @php
                         $no = 1;
                         @endphp
-                           @foreach($transaksi_pemesanan_online as $tpo) 
+                           @foreach($transaksi_pemesanan_mitra as $tpm) 
                            <tr>
-                               <td>{{$no++}}</td>
-                               <td>{{$tpo->kode_pemesanan}}</td>
-                               <td>{{$tpo->keterangan_pemesanan}}</td>
-                               <td>@currency($tpo->komisi)</td>
-                               <td>@currency($tpo->total)</td>
-                               <td>{{$tpo->created_at->format('d F Y')}}</td>
+                               <td><center>{{$no++}}</center></td>
+                               <td>{{$tpm->kode_pemesanan}}</td>
+                               <td><center>{{$tpm->keterangan_pemesanan}}</center></td>
+                               <td><center>@currency($tpm->komisi)</center></td>
+                               <td><center>@currency($tpm->total)</center></td>
+                               <td><center>{{$tpm->created_at->format('d F Y')}}</center></td>
                                
                            </tr>
                            @endforeach

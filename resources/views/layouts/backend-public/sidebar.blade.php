@@ -1,86 +1,117 @@
- <!-- Main Sidebar Container -->
- <aside class="main-sidebar sidebar-dark-primary elevation-4">
+<style>
+    #edit-profile-public:hover {
+        font-weight: bold;
+    }
+</style>
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/dashboard" class="brand-link">
-      <img src="{{ asset('assets/AdminLTE/dist/img/azyra.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-dark">AZYRA</span>
+        <img src="{{ asset('assets/AdminLTE/dist/img/azyra.png') }}" alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-dark">AZYRA</span>
     </a>
 
-<!-- Sidebar -->
-<div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="{{ asset('assets/AdminLTE/dist/img/userlogo.png')}}" class="img-circle elevation-2" alt="User Image')}}">
-      </div>
-   
-      <div class="info" >
-      @foreach ($users as $u)
-        @if($u->id == Auth::user()->id)
-          <a href="/admin" class="d-block">{{ $u->name }}</a>
-        @endif
-      @endforeach 
-      </div>
-  
-    </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{ asset('assets/AdminLTE/dist/img/userlogo.png') }}" class="img-circle elevation-2"
+                    alt="User Image">
+            </div>
 
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
+            <div class="info">
+                @if (!empty(Auth::user()))
+                    @foreach ($users as $u)
+                        @if ($u->id == Auth::user()->id)
+                            <b class="text-white">{{ $u->name }}</b><a href="" id="edit-profile-public"
+                                style="background-color: inherit; border: 0; text-decoration: none;" data-toggle="modal"
+                                data-target="#updateModal" class="d-block"><small class="text-white">Edit
+                                    Profile</small></a>
+                        @endif
+                    @endforeach
+                @else
+                    <p class="text-white"><a href="{{ route('login') }}">Masuk</a> | <a
+                            href="{{ route('register') }}">Daftar</a></p>
+                @endif
+            </div>
+
+        </div>
+
+        <!-- Sidebar Menu -->
+        @if (!empty(Auth::user()))
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Dashboard
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>
-              Produk
-              <i class="fas fa-angle-right right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Makanan & Minuman</p>
-              </a>
-            </li>
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Frozen Food</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-shopping-cart"></i>
-            <p>
-              Shopping Chart
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="{{route('logout')}}" class="nav-link">
-            <i class="nav-icon far fa-circle text-danger"></i>
-            <p>
-              Logout
-            </p>
-          </a>
-        </li>
+                    <li class="nav-item">
+                        <a href="/public" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Produk
+                                <i class="fas fa-angle-right right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/public/makanan-minuman" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Makanan & Minuman</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/public/frozen-food" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Frozen Food</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/public/checkout" class="nav-link">
+                            <i class="nav-icon fas fa-shopping-cart"></i>
+
+                            <?php
+                            $total = 0;
+                            $pesanan = \App\Models\PesananModel::where('user_id', Auth::user()->id)
+                                ->where('status', 0)
+                                ->first();
+                            
+                            if (!empty($pesanan)) {
+                                $total = \App\Models\PesananDetailModel::where('id_pesanan', $pesanan->id_pesanan)->count();
+                            } else {
+                                $total = 0;
+                            }
+                            ?>
+                            <p>
+                                Shopping Chart <span class="badge badge-danger">{{ $total }}</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="{{ route('logout') }}"
+                            class="nav-link">
+                            <i class="nav-icon far fa-circle text-danger"></i>
+                            <p>
+                                Logout
+                            </p>
+                        </a>
+                    </li>
 
 
-        {{-- <li class="nav-header">EXAMPLES</li>
+                    {{-- <li class="nav-header">EXAMPLES</li>
         <li class="nav-item">
           <a href="pages/calendar.html" class="nav-link">
             <i class="nav-icon far fa-calendar-alt"></i>
@@ -455,9 +486,10 @@
             <p>Informational</p>
           </a>
         </li> --}}
-      </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-  </div>
-  <!-- /.sidebar -->
+                </ul>
+            </nav>
+        @endif
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
 </aside>

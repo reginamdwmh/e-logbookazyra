@@ -20,14 +20,14 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Nama Makanan</th>
-                            <th>Harga</th>
-                            <th>Penjualan</th>
-                            <th>Mitra</th>
-                            <th>Total Penjualan</th>
-                            <th>Tanggal</th>
-                            <th>Aksi</th>
+                            <th><center>Harga<center></th>
+                            <th><center>Penjualan<center></th>
+                            <th><center>Mitra<center></th>
+                            <th><center>Total Penjualan<center></th>
+                            <th><center>Tanggal<center></th>
+                            <th><center>Aksi<center></th>
                         </tr>
                     
                     </thead>
@@ -38,14 +38,14 @@
                         @endphp
                         @foreach( $transaksi_umum as $tu) 
                         <tr>
-                            <td>{{$no++}}</td>
+                            <td><center>{{$no++}}</center></td>
                             <td>{{$tu->nama_makanan}}</td>
-                            <td>@currency($tu->harga)</td>
-                            <td>{{$tu->jumlah_penjualan}}</td>
+                            <td><center>@currency($tu->harga)</center></td>
+                            <td><center>{{$tu->jumlah_penjualan}}</center></td>
             
 
-                            {{-- <td>{{ $tu->mitra }}</td> --}}
-                            <td>
+                            {{-- <td><center>{{ $tu->mitra }}</center></td> --}}
+                            <td><center>
                                 <ul>
                                     @foreach ( $tu->get_transaksiumumdetail as $tud)
                                         <li>{{$tud->keterangan_pemesanan}} : {{$tud->jumlah_pemesanan}}</li>
@@ -53,16 +53,16 @@
                                     
                                     
                                 </ul>
-                            </td>
+                            </center></td>
                             
                             
-                            <td>@currency($tu->total)</td>
-                            <td>{{$tu->created_at->format('d F Y')}}</td>
+                            <td><center>@currency($tu->total)</center></td>
+                            <td><center>{{$tu->created_at->format('d F Y')}}</center></td>
                             <td>
                             {{-- <a href="/transaksi/data-umum/lihat/{{$tu->id_umum}}" title="Lihat" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>         --}}
                             <a href="/transaksi/data-umum/ubah/{{$tu->id_umum}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                             <a href="/transaksi/data-umum/hapus/{{$tu->id_umum}}" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');" title="Hapus" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                            </td>
+                            </center></td>
                         </tr>
                         @endforeach
                     </tbody>

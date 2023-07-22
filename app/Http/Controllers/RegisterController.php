@@ -21,7 +21,7 @@ class RegisterController extends Controller
             'password' => bcrypt($request->password),
             'role' => $request->role,
         ]);
-        Alert::success('Success', 'Data Berhasil Disimpan');
+        Alert::success('Register Berhasil', 'Silahkan Login');
         return view ('Login.index', ['users' => $users]);
     }
  

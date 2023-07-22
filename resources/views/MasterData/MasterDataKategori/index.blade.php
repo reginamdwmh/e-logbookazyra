@@ -21,11 +21,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Kode Kategori</th>
                             <th>Nama Kategori</th>
                             <th>Keterangan</th>
-                            <th>Aksi</th>
+                            <th><center>Aksi</center></th>
                         </tr>
                     
                     </thead>
@@ -36,15 +36,15 @@
                         @endphp
                          @foreach($kategori as $k) 
                          <tr>
-                             <td>{{$no++}}</td>
+                             <td><center>{{$no++}}</center></td>
                              <td>{{$k->kode_kategori}}</td>
                              <td>{{$k->nama_kategori}}</td>
                              <td>{{$k->keterangan_kategori}}</td>
-                             <td>
+                             <td><center>
                              {{-- <a href="/master-data/data-kategori/lihat/{{$k->id_kategori}}" title="Lihat" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> --}}
                              <a href="/master-data/data-kategori/ubah/{{$k->id_kategori}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                              <a href="/master-data/data-kategori/hapus/{{$k->id_kategori}}" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');" title="Hapus" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                             </td>
+                            </center></td>
                          </tr>
                          @endforeach
                     </tbody>

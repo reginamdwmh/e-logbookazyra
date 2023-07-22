@@ -49,6 +49,25 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="/penjualan-saya" class="nav-link">
+            <i class="nav-icon fa fa-cart-arrow-down"></i>
+            <?php
+                  $total = 0;
+                  $pesanan = \App\Models\PesananModel::where('status', 1)
+                      ->first();
+                  
+                  if (!empty($pesanan)) {
+                      $total = \App\Models\PesananDetailModel::where('id_pesanan', $pesanan->id_pesanan)->count();
+                  } else {
+                      $total = 0;
+                  }
+                  ?>
+            <p>
+              Penjualan Saya<span class="badge badge-danger">{{ $total }}</span>
+            </p>
+          </a>
+        </li>
         
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -72,15 +91,21 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="/transaksi/data-frozen-food" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Data Pembelian Frozen Food</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="/transaksi/data-penjualan-makanan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Data Penjualan Makanan</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/transaksi/data-pemesanan-online" class="nav-link">
+              <a href="/transaksi/data-pemesanan-mitra" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Data Pemesanan Online</p>
+                <p>Data Pemesanan Mitra</p>
               </a>
             </li>
             <li class="nav-item">
@@ -104,6 +129,12 @@
               <a href="/stok/stok-alat" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Stok Alat</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/stok/stok-frozen-food" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Stok Frozen Food</p>
               </a>
             </li>
           </ul>
@@ -132,13 +163,13 @@
             <li class="nav-item">
               <a href="/laporan/data-penjualan-makanan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Laporan Penjualan Makanan</p>
+                <p>Laporan Penjualan Makanan Offline</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/laporan/data-pemesanan-online" class="nav-link">
+              <a href="/laporan/data-pemesanan-mitra" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Laporan Pemesanan Online</p>
+                <p>Laporan Pemesanan Mitra</p>
               </a>
             </li>
             <li class="nav-item">
@@ -151,6 +182,12 @@
               <a href="/laporan/makanan-terlaris" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Laporan Makanan Terlaris</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/laporan/pembelian-frozen-food" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Laporan Pembelian Frozen Food</p>
               </a>
             </li>
             <li class="nav-item">

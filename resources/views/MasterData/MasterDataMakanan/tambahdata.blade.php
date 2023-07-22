@@ -34,7 +34,7 @@
                       </select>
                     </td>
                     <td>
-                      <select name="addMoreInputFields[0][id_alat]" class="form-control" required>
+                      <select name="addMoreInputFields[0][id_alat]" class="form-control">
                         <option value="">-Pilih-</option>
                         @foreach ($alat as $a)
                         <option value="{{ $a->id_alat }}">{{$a->nama_alat}}</option>

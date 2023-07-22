@@ -39,13 +39,13 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="50px"><center>No</center></th>
                             <th>Nama Makanan</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>Diskon</th>
-                            <th>Total</th>
-                            <th>Tanggal</th>
+                            <th><center>Harga</center></th>
+                            <th><center>Jumlah</center></th>
+                            <th><center>Diskon</center></th>
+                            <th><center>Total</center></th>
+                            <th><center>Tanggal</center></th>
                         </tr>
                     
                     </thead>
@@ -56,13 +56,13 @@
                         @endphp
                           @foreach($transaksi_penjualan_makanan as $tpm) 
                           <tr>
-                              <td>{{$no++}}</td>
+                              <td><center>{{$no++}}</center></td>
                               <td>{{$tpm->nama_makanan}}</td>
-                              <td>@currency($tpm->harga)</td>
-                              <td>{{$tpm->jumlah}}</td>
-                              <td>{{$tpm->diskon}}%</td>
-                              <td>@currency($tpm->total)</td>
-                              <td>{{$tpm->created_at->format('d F Y')}}</td>
+                              <td><center>@currency($tpm->harga)</center></td>
+                              <td><center>{{$tpm->jumlah}}</center></td>
+                              <td><center>{{$tpm->diskon}}%</center></td>
+                              <td><center>@currency($tpm->total)</center></td>
+                              <td><center>{{$tpm->created_at->format('d F Y')}}</center></td>
                               
                           </tr>
                           @endforeach

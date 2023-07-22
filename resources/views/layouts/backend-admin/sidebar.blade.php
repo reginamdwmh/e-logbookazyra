@@ -105,8 +105,14 @@
                 <p>Stok Alat</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="/admin/stok/stok-frozen-food" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Stok Frozen Food</p>
+              </a>
+            </li>
           </ul>
-        </li>
+        </li>        
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-table"></i>
@@ -131,13 +137,13 @@
             <li class="nav-item">
               <a href="/admin/laporan/data-penjualan-makanan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Laporan Penjualan Makanan</p>
+                <p>Laporan Penjualan Makanan Offline</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/laporan/data-pemesanan-online" class="nav-link">
+              <a href="/admin/laporan/data-pemesanan-mitra" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Laporan Pemesanan Online</p>
+                <p>Laporan Pemesanan Mitra</p>
               </a>
             </li>
             <li class="nav-item">
@@ -150,6 +156,12 @@
           <a href="/admin/laporan/makanan-terlaris" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Laporan Makanan Terlaris</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/laporan/pembelian-frozen-food" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Laporan Pembelian Frozen Food</p>
           </a>
         </li>
         <li class="nav-item">
