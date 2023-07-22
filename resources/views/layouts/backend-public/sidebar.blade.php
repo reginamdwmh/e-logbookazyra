@@ -96,10 +96,18 @@
                             }
                             ?>
                             <p>
-                                Shopping Chart <span class="badge badge-danger">{{ $total }}</span>
+                                Keranjang Pesanan <span class="badge badge-danger">{{ $total }}</span>
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">
+                          <i class="nav-icon fa fa-history"></i>
+                          <p>
+                              Riwayat Pesanan
+                          </p>
+                      </a>
+                  </li>
                     <li class="nav-item">
                         <a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="{{ route('logout') }}"
                             class="nav-link">

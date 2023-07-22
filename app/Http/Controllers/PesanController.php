@@ -89,6 +89,7 @@ class PesanController extends Controller
                 $pesanan_detail->id_pesanan = $pesanan_baru->id_pesanan;
                 $pesanan_detail->jumlah = $request->jumlah_pesanan;
                 $pesanan_detail->harga_satuan = $makanan->harga;
+                $pesanan_detail->catatan = $request->catatan;
                 $pesanan_detail->subtotal = $makanan->harga * $request->jumlah_pesanan;
                 $pesanan_detail->save();
             } else {
@@ -190,5 +191,15 @@ class PesanController extends Controller
 
         Alert::success('Success', 'Berhasil Checkout');
         return redirect()->back()->with(['users' => $users]);
+    }
+
+    public function edit_item($id)
+    {
+        $users = UsersModel::select('*')
+            ->get();
+        $pesanan_detail = PesananDetailModel::where('id', $id)->first();
+        $pesanan = PesananModel::where('id_pesanan', $pesanan_detail->id_pesanan)->first();
+
+        return view('public.checkout.ubahdata', compact('pesanan', 'pesanan_detail', 'users'));
     }
 }

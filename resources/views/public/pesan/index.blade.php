@@ -29,7 +29,6 @@
                                             <td>:</td>
                                             <td>{{ $makanan->keterangan_kategori }}</td>
                                         </tr>
-
                                         <tr>
                                             <td>Jumlah Pesanan</td>
                                             <td>:</td>
@@ -39,11 +38,24 @@
                                                     @csrf
                                                     <input type="number" name="jumlah_pesanan" class="form-control"
                                                         required>
-                                                    <button type="submit" class="btn btn-primary mt-2"><i
-                                                            class="fas fa-shopping-cart"></i> Masukan Keranjang</button>
+
+                                                        <tr>
+                                                            <td>Catatan</td>
+                                                            <td>:</td>
+                                                            <td><div class="input-group">
+                                                                <textarea class="form-control" aria-label="With textarea" name="catatan"></textarea>
+                                                              </div>
+                                                              <button type="submit" class="btn btn-primary mt-2"><i
+                                                                class="fas fa-shopping-cart"></i> Masukan Keranjang</button>
+                                                            </td>
+                                                        </tr>
+ 
+                                                    
+                                                    
                                                 </form>
                                             </td>
                                         </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>

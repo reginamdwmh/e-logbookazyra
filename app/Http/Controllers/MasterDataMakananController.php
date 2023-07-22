@@ -40,7 +40,7 @@ class MasterDataMakananController extends Controller
 
         $validatedData = $request->validate([
             'addMoreInputFields.*.nama_kategori' => 'required',
-            // 'addMoreInputFields.*.id_alat' => 'required',
+            'addMoreInputFields.*.id_alat' => 'required',
             'addMoreInputFields.*.nama_makanan' => 'required',
             'addMoreInputFields.*.harga' => 'required',
             'addMoreInputFields.*.image' => 'image|file',

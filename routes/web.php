@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\UsersModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\MasterDataMakananModel;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\UsersController;
@@ -13,7 +15,6 @@ use App\Http\Controllers\TransaksiAlatController;
 use App\Http\Controllers\TransaksiUmumController;
 use App\Http\Controllers\MasterDataAlatController;
 use App\Http\Controllers\TransaksiBahanController;
-use App\Http\Controllers\TransaksiFrozenFoodController;
 use App\Http\Controllers\LaporanDataAlatController;
 use App\Http\Controllers\LaporanDataUmumController;
 use App\Http\Controllers\MasterDataBahanController;
@@ -21,15 +22,15 @@ use App\Http\Controllers\LaporanDataBahanController;
 use App\Http\Controllers\MasterDataMakananController;
 use App\Http\Controllers\MasterDataKategoriController;
 use App\Http\Controllers\MasterDataPemesananController;
+use App\Http\Controllers\TransaksiFrozenFoodController;
 use App\Http\Controllers\LaporanOmzetPertahunController;
 use App\Http\Controllers\LaporanMakananTerlarisController;
 use App\Http\Controllers\TransaksiPemesananMitraController;
-use App\Http\Controllers\TransaksiPenjualanMakananController;
 use App\Http\Controllers\LaporanDataPemesananMitraController;
-use App\Http\Controllers\LaporanDataPenjualanMakananController;
+use App\Http\Controllers\TransaksiPenjualanMakananController;
+use App\Http\Controllers\LaporanDataPenjualanOnlineController;
 use App\Http\Controllers\LaporanPembelianFrozenFoodController;
-use App\Models\MasterDataMakananModel;
-use App\Models\UsersModel;
+use App\Http\Controllers\LaporanDataPenjualanMakananController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -238,11 +239,15 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     // Tabel Laporan Penjualan Makanan
     Route::get('/laporan/data-penjualan-makanan', [LaporanDataPenjualanMakananController::class, 'indexlaporanpenjualanmakanan'])->name('indexlaporanpenjualanmakanan');
     Route::get('/laporan/data-penjualan-makanan/cetak/{tglawal}/{tglakhir}', [LaporanDataPenjualanMakananController::class, 'cetaklaporantransaksipenjualanmakanan'])->name('cetaklaporantransaksipenjualanmakanan');
+    
+    // Tabel Laporan Penjualan Online
+    Route::get('/laporan/data-penjualan-online', [LaporanDataPenjualanOnlineController::class, 'indexlaporanpenjualanonline'])->name('indexlaporanpenjualanonline');
+    Route::get('/laporan/data-penjualan-online/cetak/{tglawal}/{tglakhir}', [LaporanDataPenjualanOnlineController::class, 'cetaklaporantransaksipenjualanonline'])->name('cetaklaporantransaksipenjualanonline');
 
     //Tabel Laporan Pemesanan Mitra
     Route::get('/laporan/data-pemesanan-mitra', [LaporanDataPemesananMitraController::class, 'indexlaporanpemesananmitra'])->name('indexlaporanpemesananmitra');
     Route::get('/laporan/data-pemesanan-mitra/cetak/{tglawal}/{tglakhir}', [LaporanDataPemesananMitraController::class, 'cetaklaporantransaksipemesananmitra'])->name('cetaklaporantransaksipemesananmitra');
-
+    
     //Tabel Laporan Umum
     Route::get('/laporan/data-umum', [LaporanDataUmumController::class, 'indexlaporanumum'])->name('indexlaporanumum');
     Route::get('/laporan/data-umum/cetak/{tglawal}/{tglakhir}', [LaporanDataUmumController::class, 'cetaklaporantransaksiumum'])->name('cetaklaporantransaksiumum');
@@ -278,5 +283,6 @@ Route::group(['middleware' => ['auth', 'role:public']], function () {
     Route::post('/public/pesan/add_to_cart/{id_makanan}', [PesanController::class, 'add_to_cart'])->name('add_to_cart');
     Route::get('/public/checkout', [PesanController::class, 'indexcheckout'])->name('indexcheckout');
     Route::get('/public/checkout/hapus/{id}', [PesanController::class, 'hapus_item'])->name('hapus_item');
+    Route::get('/public/checkout/edit/{id}', [PesanController::class, 'edit_item'])->name('edit_item');
     Route::get('/public/checkout/confirm', [PesanController::class, 'confirm'])->name('confirm');
 });

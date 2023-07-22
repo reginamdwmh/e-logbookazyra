@@ -32,11 +32,11 @@
                         <table id="example1" class="table table-bordered table-striped" style="margin-top:20px;">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th width="50px"><center>No</center></th>
                                     <th>Nama</th>
-                                    <th>Tanggal</th>
-                                    <th>Total</th>
-                                    <th>Aksi</th>
+                                    <th><center>Tanggal</center></th>
+                                    <th><center>Total</center></th>
+                                    <th><center>Aksi</center></th>
                                 </tr>
 
                             </thead>
@@ -44,14 +44,14 @@
                                 <?php $no = 1; ?>
                                 @foreach ($data_penjualan as $item)
                                     <tr>
-                                        <td>{{ $no++ }}</td>
+                                        <td><center>{{ $no++ }}</center></td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ date('d M Y H:i', strtotime($item->tanggal)) }}</td>
-                                        <td>@currency($item->total)</td>
-                                        <td>
+                                        <td><center>{{ date('d M Y H:i', strtotime($item->tanggal)) }}</center></td>
+                                        <td><center>@currency($item->total)</center></td>
+                                        <td><center>
                                             <a href="/penjualan-saya/detail/{{ $item->id_pesanan }}" title="Detail"
                                                 class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></a>
-                                        </td>
+                                        </center></td>
                                     </tr>
                                 @endforeach
                             </tbody>

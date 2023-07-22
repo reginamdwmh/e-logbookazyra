@@ -19,12 +19,13 @@
                         <table id="example1" class="table table-bordered table-striped" style="margin-top:20px;">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th width="50px"><center>No</center></th>
                                     <th>Nama Barang</th>
-                                    <th>Jumlah</th>
-                                    <th>Harga</th>
-                                    <th>Total</th>
-                                    <th>Aksi</th>
+                                    <th><center>Jumlah</center></th>
+                                    <th><center>Harga</center></th>
+                                    <th><center>Total</center></th>
+                                    <th>Catatan Pembeli</th>
+                                    <th><center>Aksi</center></th>
                                 </tr>
 
                             </thead>
@@ -32,29 +33,28 @@
                                 <?php $no = 1; ?>
                                 @foreach ($pesanan_detail as $item)
                                     <tr>
-                                        <td>{{ $no++ }}</td>
+                                        <td><center>{{ $no++ }}</center></td>
                                         <td>{{ $item->nama_makanan }}</td>
-                                        <td>{{ $item->jumlah }}</td>
-                                        <td>@currency($item->harga_satuan)</td>
-                                        <td>@currency($item->subtotal)</td>
-                                        <td>
-                                            <a href="#" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                        <td><center>{{ $item->jumlah }}</center</td>
+                                        <td><center>@currency($item->harga_satuan)</center</td>
+                                        <td><center>@currency($item->subtotal)</center</td>
+                                        <td>{{ $item->catatan }}</td>
+                                        <td><center>
+                                            <a href="/public/checkout/edit/{{ $item->id }}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                                             <a href="/public/checkout/hapus/{{ $item->id }}"
                                                 onclick="return confirm('Apakah Anda Yakin Menghapus Data?');"
                                                 title="Hapus" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                        </td>
+                                        </center</td>
                                     </tr>
                                 @endforeach
                             </tbody>
 
                             <tr>
-                                <td width="150" style="background-color:#fff;">
+                                <td colspan="7">
                                     <div style="float:left;">
                                         <a href="{{ route('confirm') }}" class="btn btn-primary">
                                             <i class="fas fa-shopping-cart"></i> Checkout</a>
                                     </div>
-                                </td>
-                                <td colspan="5">
                                     <div style="float:right;">
                                         <b>Grand Total :</b> @currency($pesanan->total)
                                     </div>
@@ -65,7 +65,7 @@
                 @else
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <td colspan="6">Tidak ada data pembelian</td>
+                            <td colspan="7">Tidak ada data pembelian</td>
                         </tr>
                     </table>
                 @endif

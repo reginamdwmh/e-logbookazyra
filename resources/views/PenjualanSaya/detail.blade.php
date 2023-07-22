@@ -38,11 +38,12 @@
                         <table id="example1" class="table table-bordered table-striped" style="margin-top:20px;">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th width="50px"><center>No</center></th>
                                     <th>Nama</th>
-                                    <th>Jumlah</th>
-                                    <th>Harga</th>
-                                    <th>Total</th>
+                                    <th><center>Jumlah</center></th>
+                                    <th><center>Harga</center></th>
+                                    <th>Catatan</th>
+                                    <th><center>Total</center></th>
                                 </tr>
 
                             </thead>
@@ -50,11 +51,12 @@
                                 <?php $no = 1; ?>
                                 @foreach ($data_penjualan_detail as $item)
                                     <tr>
-                                        <td>{{ $no++ }}</td>
+                                        <td><center>{{ $no++ }}</center></td>
                                         <td>{{ $item->nama_makanan }}</td>
-                                        <td>{{ number_format($item->jumlah, 0, ',', '.') }}</td>
-                                        <td>@currency($item->harga_satuan)</td>
-                                        <td>@currency($item->subtotal)</td>
+                                        <td><center>{{ number_format($item->jumlah, 0, ',', '.') }}</center></td>
+                                        <td><center>@currency($item->harga_satuan)</center></td>
+                                        <td>{{ $item->catatan }}</td>
+                                        <td><center>@currency($item->subtotal)</center></td>
                                     </tr>
                                 @endforeach
                             </tbody>

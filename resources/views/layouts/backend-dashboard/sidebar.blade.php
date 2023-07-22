@@ -167,6 +167,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="/laporan/data-penjualan-online" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Laporan Penjualan Online</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="/laporan/data-pemesanan-mitra" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Laporan Pemesanan Mitra</p>
