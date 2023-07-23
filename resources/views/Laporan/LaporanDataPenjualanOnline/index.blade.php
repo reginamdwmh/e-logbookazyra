@@ -56,8 +56,8 @@
                                 <td><center>{{ date('d M Y H:i', strtotime($item->tanggal)) }}</center></td>
                                 <td><center>@currency($item->total)</center></td>
                                 <td><center>
-                                    <a href="/penjualan-saya/detail/{{ $item->id_pesanan }}" title="Detail"
-                                        class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                    <a href="/laporan/data-penjualan-online/detail/{{ $item->id_pesanan }}" title="Detail"
+                                        class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                                 </center></td>
                             </tr>
                         @endforeach

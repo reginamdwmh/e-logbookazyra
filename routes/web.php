@@ -243,6 +243,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     // Tabel Laporan Penjualan Online
     Route::get('/laporan/data-penjualan-online', [LaporanDataPenjualanOnlineController::class, 'indexlaporanpenjualanonline'])->name('indexlaporanpenjualanonline');
     Route::get('/laporan/data-penjualan-online/cetak/{tglawal}/{tglakhir}', [LaporanDataPenjualanOnlineController::class, 'cetaklaporantransaksipenjualanonline'])->name('cetaklaporantransaksipenjualanonline');
+    Route::get('/laporan/data-penjualan-online/detail/{id_pesanan}', [LaporanDataPenjualanOnlineController::class, 'detail_laporan_online'])->name('detail_laporan_online');
 
     //Tabel Laporan Pemesanan Mitra
     Route::get('/laporan/data-pemesanan-mitra', [LaporanDataPemesananMitraController::class, 'indexlaporanpemesananmitra'])->name('indexlaporanpemesananmitra');

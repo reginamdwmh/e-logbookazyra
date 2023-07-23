@@ -197,9 +197,8 @@ class PesanController extends Controller
     {
         $users = UsersModel::select('*')
             ->get();
-        $pesanan_detail = PesananDetailModel::where('id', $id)->first();
-        $pesanan = PesananModel::where('id_pesanan', $pesanan_detail->id_pesanan)->first();
+       
 
-        return view('public.checkout.ubahdata', compact('pesanan', 'pesanan_detail', 'users'));
+        return view('public.checkout.ubahdata', compact('users'));
     }
 }

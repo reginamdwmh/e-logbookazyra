@@ -50,7 +50,7 @@
                                         <td><center>@currency($item->total)</center></td>
                                         <td><center>
                                             <a href="/penjualan-saya/detail/{{ $item->id_pesanan }}" title="Detail"
-                                                class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                                class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                                         </center></td>
                                     </tr>
                                 @endforeach

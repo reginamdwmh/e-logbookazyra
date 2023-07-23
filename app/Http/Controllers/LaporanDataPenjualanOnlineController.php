@@ -8,6 +8,7 @@ use App\Models\UsersModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\PesananModel;
+use App\Models\PesananDetailModel;
 
 class LaporanDataPenjualanOnlineController extends Controller
 {
@@ -23,5 +24,18 @@ class LaporanDataPenjualanOnlineController extends Controller
         } else if($user->role == 'user'){
             return view('Laporan.LaporanDataPenjualanOnline.index',['pesanan' => $pesanan,'users' => $users]);
         }
+    }
+
+    public function detail_laporan_online($id_pesanan)
+    {
+        $users = UsersModel::select('*')
+            ->get();
+            $data_penjualan = PesananModel::where('user_id')
+            ->where('status', 0)
+            ->first();
+        $data_penjualan_detail = PesananDetailModel::join('makanan', 'makanan.id_makanan', 'pesanan_detail.id_item')->select('pesanan_detail.*', 'makanan.nama_makanan')->where('id_pesanan', $id_pesanan)->get();
+       
+        // dd($data_penjualan_detail);
+        return view('public.checkout.detail', ['users' => $users, 'data_penjualan' => $data_penjualan, 'data_penjualan_detail' => $data_penjualan_detail]);
     }
 }

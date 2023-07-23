@@ -1,4 +1,4 @@
-@extends('layouts.backend-public.app')
+@extends('layouts.backend-dashboard.app')
 @section('title')
 
 @section('content')
@@ -6,12 +6,12 @@
         <div class="card card-danger">
             <div class="card-header">
                 <h3 class="card-title">
-                    <i class="fa fa-table"></i> Keranjang Pesanan
+                    <i class="fa fa-table"></i> Detail Penjualan Online
                 </h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                @if (!empty($pesanan))
+                @if (!empty($data_penjualan_detail))
                     <table class="table table-bordered table-striped">
                     </table>
                     <br>
@@ -20,43 +20,35 @@
                             <thead>
                                 <tr>
                                     <th width="50px"><center>No</center></th>
-                                    <th>Nama Barang</th>
+                                    <th>Nama</th>
                                     <th><center>Jumlah</center></th>
                                     <th><center>Harga</center></th>
+                                    <th>Catatan</th>
                                     <th><center>Total</center></th>
-                                    <th>Catatan Pembeli</th>
-                                    <th><center>Aksi</center></th>
                                 </tr>
 
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
-                                @foreach ($pesanan_detail as $item)
+                                @php
+                                
+                                    $no = 1 ;
+                                @endphp
+                                @foreach ($data_penjualan_detail as $item)
                                     <tr>
                                         <td><center>{{ $no++ }}</center></td>
                                         <td>{{ $item->nama_makanan }}</td>
-                                        <td><center>{{ $item->jumlah }}</center</td>
-                                        <td><center>@currency($item->harga_satuan)</center</td>
-                                        <td><center>@currency($item->subtotal)</center</td>
+                                        <td><center>{{ number_format($item->jumlah, 0, ',', '.') }}</center></td>
+                                        <td><center>@currency($item->harga_satuan)</center></td>
                                         <td>{{ $item->catatan }}</td>
-                                        <td><center>
-                                            <a href="/public/checkout/edit/{{ $item->id }}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                            <a href="/public/checkout/hapus/{{ $item->id }}"
-                                                onclick="return confirm('Apakah Anda Yakin Menghapus Data?');"
-                                                title="Hapus" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                        </center</td>
+                                        <td><center>@currency($item->subtotal)</center></td>
                                     </tr>
                                 @endforeach
                             </tbody>
-
+                            
                             <tr>
                                 <td colspan="7">
-                                    <div style="float:left;">
-                                        <a href="{{ route('confirm') }}" class="btn btn-primary">
-                                            <i class="fas fa-shopping-cart"></i> Checkout</a>
-                                    </div>
                                     <div style="float:right;">
-                                        <b>Grand Total :</b> @currency($pesanan->total)
+                                        <b>Grand Total :</b> Rp.
                                     </div>
                                 </td>
                             </tr>
@@ -65,7 +57,7 @@
                 @else
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <td colspan="7">Tidak ada data pembelian</td>
+                            <td colspan="6">Tidak ada data penjualan detail</td>
                         </tr>
                     </table>
                 @endif
