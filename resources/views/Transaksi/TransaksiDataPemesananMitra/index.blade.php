@@ -42,7 +42,7 @@
                             <td>{{$tpm->keterangan_pemesanan}}</td>
                             <td><center>@currency($tpm->komisi)</center></td>
                             <td><center>@currency($tpm->total)</center></td>
-                            <td><center>{{$tpm->created_at->format('d F Y')}}</center></td>
+                            <td><center>{{tanggal_indo(date('d-m-Y',strtotime($tpm->created_at)))}}</center></td>
                             <td><center>
                             <a href="/transaksi/data-pemesanan-mitra/lihat/{{$tpm->id_mitra}}" title="Lihat" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                             <a href="/transaksi/data-pemesanan-mitra/ubah/{{$tpm->id_mitra}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>

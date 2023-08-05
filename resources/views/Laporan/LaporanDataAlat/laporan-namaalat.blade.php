@@ -35,7 +35,7 @@
             @foreach($tanggal as $ta) 
             <tr>
                 <td><center>{{$no++}}</center></td>
-                <td><center>{{$ta->created_at->format('d/m/Y')}}</center></td>    
+                <td><center>{{tanggal_indo(date('d-m-Y',strtotime($ta->created_at)))}}</center></td>    
                 <td>{{$ta->nama_alat}}</td>
                 <td><center>@currency($ta->harga)</center></td>
                 <td><center>{{$ta->jumlah}}</center></td>

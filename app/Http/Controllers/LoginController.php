@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\MasterDataMakananModel;
+use App\Models\UsersModel;
 
 class LoginController extends Controller
 {
@@ -66,7 +67,12 @@ class LoginController extends Controller
             } elseif ($user->role === 'user') {
                 return redirect()->intended('/dashboard');
             } elseif ($user->role === 'public') {
-                return redirect()->intended('/public');
+                // return redirect()->intended('/public');
+                $users = UsersModel::select('*')
+                    ->get();
+                $makanan = MasterDataMakananModel::select('*')
+                    ->get();
+                return view('public.index', ['makanan' => $makanan, 'users' => $users]);
             }
         }
 

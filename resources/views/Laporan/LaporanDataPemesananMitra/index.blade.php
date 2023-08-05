@@ -60,7 +60,7 @@
                                <td>{{$tpm->keterangan_pemesanan}}</td>
                                <td><center>@currency($tpm->komisi)</center></td>
                                <td><center>@currency($tpm->total)</center></td>
-                               <td><center>{{$tpm->created_at->format('d F Y')}}</center></td>
+                               <td><center>{{tanggal_indo(date('d-m-Y',strtotime($tpm->created_at)))}}</center></td>
                                
                            </tr>
                            @endforeach

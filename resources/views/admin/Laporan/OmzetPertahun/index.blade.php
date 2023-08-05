@@ -1,4 +1,4 @@
-@extends('layouts.backend-dashboard.app')
+@extends('layouts.backend-admin.app')
 @section('title')
 
 @section('content')
@@ -143,7 +143,7 @@
                 <td>@currency($tb->harga)</td>
                 <td>{{$tb->jumlah}}</td>
                 <td>@currency($tb->total)</td>
-                <td>{{$tb->created_at}}</td>
+                <td>{{tanggal_indo(date('d-m-Y',strtotime($tb->created_at)))}}</td>
                 <td>
                 <a href="/transaksi/data-alat/ubah/{{$tb->id_transaksialat}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                 <a href="/transaksi/data-alat/hapus/{{$tb->id_transaksialat}}" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');" title="Hapus" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>

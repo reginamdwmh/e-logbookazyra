@@ -60,11 +60,11 @@
                             @foreach ($transaksi_frozen_food as $tb)
                                 <tr>
                                     <td><center>{{ $no++ }}</center></td>
-                                    <td>{{ $tb->nama_bahan }}</td>
+                                    <td>{{ $tb->nama_makanan }}</td>
                                     <td><center>@currency($tb->harga)</center></td>
                                     <td><center>{{ $tb->jumlah }}</center></td>
                                     <td><center>@currency($tb->total)</center></td>
-                                    <td><center>{{ $tb->created_at->format('d F Y') }}</center></td>
+                                    <td><center>{{tanggal_indo(date('d-m-Y',strtotime($tb->created_at)))}}</center></td>
 
                                 </tr>
                             @endforeach

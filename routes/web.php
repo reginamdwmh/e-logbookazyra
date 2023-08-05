@@ -285,5 +285,7 @@ Route::group(['middleware' => ['auth', 'role:public']], function () {
     Route::get('/public/checkout', [PesanController::class, 'indexcheckout'])->name('indexcheckout');
     Route::get('/public/checkout/hapus/{id}', [PesanController::class, 'hapus_item'])->name('hapus_item');
     Route::get('/public/checkout/edit/{id}', [PesanController::class, 'edit_item'])->name('edit_item');
-    Route::get('/public/checkout/confirm', [PesanController::class, 'confirm'])->name('confirm');
+    Route::post('/public/checkout/confirm', [PesanController::class, 'confirm'])->name('confirm');
+    Route::post('/public/checkout/update_to_cart', [PesanController::class, 'update_to_cart'])->name('update_to_cart');
+    Route::get('/public/history', [PesanController::class, 'indexhistory'])->name('indexhistory');
 });

@@ -61,7 +61,7 @@
             @foreach($tanggal as $t) 
             <tr>
                 <td><center>{{$no++}}</center></td>
-                <td><center>{{$t->created_at->format('d F Y')}}</center></td>    
+                <td><center>{{tanggal_indo(date('d-m-Y',strtotime($t->created_at)))}}</center></td>    
                 <td><center>{{$t->kode_pemesanan}}</center></td>
                 <td><center>{{$t->keterangan_pemesanan}}</center></td>
                 @php

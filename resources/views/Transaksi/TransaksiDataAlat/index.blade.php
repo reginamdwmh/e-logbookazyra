@@ -42,7 +42,7 @@
                             <td><center>@currency($a->harga)</center></td>
                             <td><center>{{$a->jumlah}}</center></td>
                             <td><center>@currency($a->total)</center></td>
-                            <td><center>{{$a->created_at->format('d F Y')}}</center></td>
+                            <td><center>{{tanggal_indo(date('d-m-Y',strtotime($a->created_at)))}}</center></td>
                             <td><center>
                             {{-- <a href="/transaksi/data-alat/lihat/{{$a->id_transaksialat}}" title="Lihat" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> --}}
                             <a href="/transaksi/data-alat/ubah/{{$a->id_transaksialat}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>

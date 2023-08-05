@@ -91,6 +91,7 @@ class PesanController extends Controller
                 $pesanan_detail->harga_satuan = $makanan->harga;
                 $pesanan_detail->catatan = $request->catatan;
                 $pesanan_detail->subtotal = $makanan->harga * $request->jumlah_pesanan;
+                $pesanan_detail->user_id = Auth::user()->id;
                 $pesanan_detail->save();
             } else {
                 $pesanan_detail = PesananDetailModel::where('id_item', $makanan->id_makanan)->where('id_pesanan', $pesanan_baru->id_pesanan)->first();
@@ -141,15 +142,22 @@ class PesanController extends Controller
 
         $pesanan = PesananModel::where('id_pesanan', $pesanan_detail->id_pesanan)->first();
 
+        // dd(count($pesanan_detail));
         $pesanan->total = $pesanan->total - $pesanan_detail->subtotal;
         $pesanan->update();
-
         $pesanan_detail->delete();
+
+        $cek_pesanandetail = PesananDetailModel::where('id_pesanan', $pesanan->id_pesanan)->get();
+
+        if (count($cek_pesanandetail) < 1) {
+            $pesanan->delete();
+        }
+
         Alert::success('Success', 'Data Berhasil Dihapus dari Keranjang');
         return redirect()->back()->with(['users' => $users]);
     }
 
-    public function confirm()
+    public function confirm(Request $request)
     {
         $users = UsersModel::select('*')
             ->get();
@@ -187,6 +195,13 @@ class PesanController extends Controller
 
                 // dd($stok);
             }
+
+            if ($request->file('image')) {
+                $value->image = $request->file('image')->store('makanan-foto');
+            }
+            $value->jenis_pembayaran = $request->pembayaran;
+            // $value->image = $request->image;
+            $value->update();
         }
 
         Alert::success('Success', 'Berhasil Checkout');
@@ -197,8 +212,93 @@ class PesanController extends Controller
     {
         $users = UsersModel::select('*')
             ->get();
-       
+        $query = "SELECT
+        pd.id,
+        pd.id_pesanan,
+        m.nama_makanan,
+        pd.harga_satuan,
+        pd.jumlah,
+        pd.subtotal,
+        COALESCE(pd.catatan, '') AS catatan,
+        m.image,
+        k.keterangan_kategori
+    FROM
+        pesanan_detail pd
+        LEFT JOIN makanan m ON m.id_makanan = pd.id_item
+        LEFT JOIN kategori k ON k.nama_kategori = m.nama_kategori
+    WHERE pd.id = '" . $id . "'
+    ORDER BY
+        pd.id,
+        pd.id_pesanan";
 
-        return view('public.checkout.ubahdata', compact('users'));
+        $pesanan_detail = DB::select($query);
+        // dd($pesanan_detail[0]->harga_satuan);
+
+        return view('public.checkout.ubahdata', ['users' => $users, 'pesanan_detail' => $pesanan_detail]);
+    }
+
+    public function update_to_cart(Request $request)
+    {
+        $users = UsersModel::select('*')
+            ->get();
+        $id_pesanan_detail = PesananDetailModel::where('id', $request->id)->first();
+
+        $stok = 0;
+        $makanan = MasterDataMakananModel::where('id_makanan', $id_pesanan_detail->id_item)->first();
+        // dd($makanan);
+        if (!empty($makanan->id_alat)) {
+            $datastok = MasterDataMakananModel::join('stok_alat', 'stok_alat.id_alat', '=', 'makanan.id_alat')->where('id_makanan', $id_pesanan_detail->id_item)->first(['stok_alat.stok_masuk', 'stok_alat.stok_keluar']);
+            $stok = $datastok->stok_masuk - $datastok->stok_keluar;
+        } else {
+            $datastok = MasterDataMakananModel::join('stok_frozen_food', 'stok_frozen_food.id_makanan', '=', 'makanan.id_makanan')->where('stok_frozen_food.id_makanan', $id_pesanan_detail->id_item)->first(['stok_frozen_food.stok_masuk', 'stok_frozen_food.stok_keluar']);
+            $stok = $datastok->stok_masuk - $datastok->stok_keluar;
+        }
+
+        // $tanggal = Carbon::now();
+
+        if ($request->jumlah_pesanan > $stok) {
+            Alert::error('Error', 'Stok Tidak Mencukupi');
+            return redirect()->back()->with(['users' => $users]);
+        } else {
+            $pesanan_detail = PesananDetailModel::where('id', $request->id)->first();
+
+            $pesanan = PesananModel::where('id_pesanan', $pesanan_detail->id_pesanan)->first();
+
+            // $pesanan = PesananModel::where('user_id', Auth::user()->id)->where('status', 0)->first();
+            // if ($request->jumlah_pesanan < $pesanan_detail->jumlah) {
+            //     $pesanan->total =($pesanan->total - $pesanan_detail->subtotal) - ($request->jumlah_pesanan * $pesanan_detail->harga_satuan);
+            //     $pesanan->update();
+            // } else {
+            $pesanan->total = ($pesanan->total - $pesanan_detail->subtotal) + ($request->jumlah_pesanan * $pesanan_detail->harga_satuan);
+            $pesanan->update();
+            // }
+
+            $pesanan_detail->jumlah = $request->jumlah_pesanan;
+            $pesanan_detail->subtotal = $request->jumlah_pesanan * $pesanan_detail->harga_satuan;
+            $pesanan_detail->catatan = $request->catatan;
+            $pesanan_detail->update();
+        }
+        Alert::success('Success', 'Data Berhasil Update Keranjang');
+        return redirect()->back()->with(['users' => $users]);
+    }
+
+    public function indexhistory()
+    {
+        $users = UsersModel::select('*')
+            ->get();
+        // $makanan = MasterDataMakananModel::where('id_makanan', $id_makanan)->first();
+        // $makanan = MasterDataMakananModel::join('kategori', 'makanan.nama_kategori', '=', 'kategori.nama_kategori')->where('id_makanan', $id_makanan)->first(['makanan.*', 'kategori.keterangan_kategori']);
+        // dd($makanan);
+        $pesanan = DB::table('pesanan')->select(DB::raw('SUM(total) AS total'))->where('user_id', Auth::user()->id)->first();
+        if (!empty($pesanan)) {
+            $pesanan_detail = PesananDetailModel::join('makanan', 'pesanan_detail.id_item', '=', 'makanan.id_makanan')->where('user_id', Auth::user()->id)->get(['pesanan_detail.*', 'makanan.nama_makanan']);
+        }
+
+        if (!empty($pesanan)) {
+            // dd($total);
+            return view('public.history.index', ['users' => $users, 'pesanan' => $pesanan, 'pesanan_detail' => $pesanan_detail]);
+        } else {
+            return view('public.history.index', compact('users'));
+        }
     }
 }

@@ -2,43 +2,83 @@
 @section('title')
 
 @section('content')
-<section class="content">
-    <div class="card card-danger">
-        <div class="card-header">
-            <h3 class="card-title">
-                <i class="fa fa-table"></i> Makanan Terlaris
-            </h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            
-                
+    <section class="content">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa fa-table"></i> Makanan Terlaris
+                </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+
                 <form action="#" method="GET" class="card">
                     <div class="table-responsive">
-                <div class="card-body">
-                    <div class="row">
-                    <div class="col-md-4">
-                        <label for="label">Tanggal Awal</label>
-                        <input type="date" name="tglawal" id="tglawal" class="form-control"><br>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="label">Tanggal Akhir</label>
-                        <input type="date" name="tglakhir" id="tglakhir" class="form-control">
-                        
-                    </div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <a href="#" onclick="this.href='/laporan/makanan-terlaris/cetak/'+document.getElementById('tglawal').value +
-                        '/' + document.getElementById('tglakhir').value" target="_blank" class="btn btn-primary">
-                        <i class="fa fa-print"></i>Cetak</a>
-                    </div>
-                </div>
-                
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="label">Tanggal Awal</label>
+                                    <input type="date" name="tglawal" id="tglawal" class="form-control"><br>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="label">Tanggal Akhir</label>
+                                    <input type="date" name="tglakhir" id="tglakhir" class="form-control">
+
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <a href="#"
+                                        onclick="this.href='/laporan/makanan-terlaris/cetak/'+document.getElementById('tglawal').value +
+                        '/' + document.getElementById('tglakhir').value"
+                                        target="_blank" class="btn btn-primary">
+                                        <i class="fa fa-print"></i>Cetak</a>
+                                </div>
+                            </div>
+
                 </form>
+                <div id="piechart" style="width: 900px; height: 500px"></div>
 
             </div>
-        </div>        
-</section>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> --}}
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                google.charts.load('current', {
+                    'packages': ['corechart']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    // Set Data
+                    var data = google.visualization.arrayToDataTable([
+                        ['Makanan', 'Total'],
+
+                        @php
+                            foreach ($hasil_chart as $d) {
+                                echo "['" . $d->nama_makanan . "'," . $d->total_barang_terlaris . '],';
+                            }
+                        @endphp
+                    ]);
+                    // Set Options
+                    var options = {
+                        title: 'Total Penjualan Terlaris',
+                        is3D: true,
+                    };
+                    // Draw
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                    chart.draw(data, options);
+                }
+
+            })
+        </script>
+    </section>
 
 @endsection
 
@@ -94,7 +134,7 @@
                 <th>Tanggal</th>
                 <th>Aksi</th>
             </tr>
-            @foreach($transaksi_alat as $index => $tb) 
+            @foreach ($transaksi_alat as $index => $tb) 
             <tr>
                 <td>{{$index + $transaksi_alat->firstItem()}}</td>
                 <td>{{$tb->nama_alat}}</td>

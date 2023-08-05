@@ -40,7 +40,7 @@ class MasterDataMakananController extends Controller
 
         $validatedData = $request->validate([
             'addMoreInputFields.*.nama_kategori' => 'required',
-            'addMoreInputFields.*.id_alat' => 'required',
+            'addMoreInputFields.*.id_alat' => 'nullable|numeric',
             'addMoreInputFields.*.nama_makanan' => 'required',
             'addMoreInputFields.*.harga' => 'required',
             'addMoreInputFields.*.image' => 'image|file',
@@ -58,14 +58,14 @@ class MasterDataMakananController extends Controller
             MasterDataMakananModel::create($value);
         }
 
-          
         // $makanan=MasterDataMakananModel::create([
         //     'nama_kategori' => $request->nama_kategori,
+        //     'id_alat' => $request->id_alat,
         //     'nama_makanan' => $request->nama_makanan,
         //     'harga' => $request->harga,
         //     'image' => $request->image->store('makanan-foto'),
         // ]);
-        // // dd($makanan);
+        // dd($makanan);
         
         Alert::success('Success', 'Data Berhasil Disimpan');
         return redirect()->route('indexmakanan',['users' => $users]);

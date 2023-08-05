@@ -71,7 +71,7 @@
                                 </ul>
                             </center></td>
                               <td><center>@currency($tu->total)</center></td>
-                              <td><center>{{$tu->created_at->format('d F Y')}}</center></td>
+                              <td><center>{{tanggal_indo(date('d-m-Y',strtotime($tu->created_at)))}}</center></td>
                               
                           </tr>
                           @endforeach
