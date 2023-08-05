@@ -59,7 +59,7 @@ class DashboardController extends Controller
     {
         $users = UsersModel::select('*')
             ->get();
-        $data_penjualan = PesananModel::join('users', 'users.id', 'pesanan.user_id')->select('pesanan.*', 'users.name')->where('status', '1')->orderBy('pesanan.created_at', 'DESC')->get();
+        $data_penjualan = PesananModel::join('users', 'users.id', 'pesanan.user_id')->select('pesanan.*', 'users.*')->where('status', '1')->orderBy('pesanan.created_at', 'DESC')->get();
         // dd($data_penjualan);
         return view('PenjualanSaya.index', ['users' => $users, 'data_penjualan' => $data_penjualan]);
     }

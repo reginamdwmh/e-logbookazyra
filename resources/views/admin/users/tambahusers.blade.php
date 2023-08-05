@@ -31,8 +31,20 @@
                                 Password
                             </div>
                             <div class="form-group">
+                                <label>Konfirmasi Password</label>
+                                <input type="password" id="konfirmasi_pass" name="konfirmasi_password" class="form-control"
+                                    placeholder="Konfirmasi Password" required>
+                                <input id="mybutton_konf" onclick="change_pass()" type="checkbox" class="form-checkbox"> Lihat
+                                Konfirmasi Password
+                                <small style="color: red; display: none;" id="beda_pass">Password tidak sama</small>
+                            </div>
+                            <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="alamat" class="form-control" placeholder="Alamat" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>No HP</label>
+                                <input type="number" name="no_hp" class="form-control" placeholder="No HP" required>
                             </div>
                             <div class="form-group">
                                 <label>Role</label>
@@ -54,18 +66,45 @@
         </div>
     </section>
 
-    <script type="text/javascript">
-        function change() {
-            var x = document.getElementById('pass').type;
-
-            if (x == 'password') {
-                document.getElementById('pass').type = 'text';
-                document.getElementById('mybutton').innerHTML;
-            } else {
-                document.getElementById('pass').type = 'password';
-                document.getElementById('mybutton').innerHTML;
-            }
-        }
-    </script>
+     <script type="text/javascript">
+         function change() {
+             var x = document.getElementById('pass').type;
+ 
+             if (x == 'password') {
+                 document.getElementById('pass').type = 'text';
+                 document.getElementById('mybutton').innerHTML;
+             } else {
+                 document.getElementById('pass').type = 'password';
+                 document.getElementById('mybutton').innerHTML;
+             }
+         }
+ 
+         function change_pass() {
+             var y = document.getElementById('konfirmasi_pass').type;
+ 
+             if (y == 'password') {
+                 document.getElementById('konfirmasi_pass').type = 'text';
+                 document.getElementById('mybutton_konf').innerHTML;
+             } else {
+                 document.getElementById('konfirmasi_pass').type = 'password';
+                 document.getElementById('mybutton_konf').innerHTML;
+             }
+         }
+ 
+         document.getElementById('konfirmasi_pass').addEventListener('keyup', function() {
+             var password = document.getElementById('pass').value;
+             var konfirmasi_pass = document.getElementById('konfirmasi_pass').value;
+ 
+             if (password != konfirmasi_pass) {
+                 document.getElementById('beda_pass').style.display = 'block';
+                 document.getElementById("daftar").disabled = true;
+                 document.getElementById('daftar').style.backgroundColor  = 'grey';
+             } else {
+                 document.getElementById('beda_pass').style.display = 'none';
+                 document.getElementById("daftar").disabled = false;
+                 document.getElementById('daftar').style.backgroundColor  = '#28a745';
+             }
+         })
+     </script>
 
 @endsection

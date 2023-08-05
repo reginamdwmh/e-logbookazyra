@@ -34,9 +34,10 @@
                                 <tr>
                                     <th width="50px"><center>No</center></th>
                                     <th>Nama</th>
+                                    <th>Alamat</th>
+                                    <th><center>No Hp</center></th>
                                     <th><center>Tanggal</center></th>
                                     <th><center>Total</center></th>
-                                    <th><center>Jenis Pembayaran</center></th>
                                     <th><center>Aksi</center></th>
                                 </tr>
 
@@ -47,9 +48,11 @@
                                     <tr>
                                         <td><center>{{ $no++ }}</center></td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->alamat }}</td>
+                                        <td><center>{{ $item->no_hp }}</center></td>
                                         <td><center>{{ date('d M Y H:i', strtotime($item->tanggal)) }}</center></td>
                                         <td><center>@currency($item->total)</center></td>
-                                        <td><center></center></td>
+                                        
                                         <td><center>
                                             <a href="/penjualan-saya/detail/{{ $item->id_pesanan }}" title="Detail"
                                                 class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>

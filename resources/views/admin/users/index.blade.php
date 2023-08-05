@@ -72,6 +72,8 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Email</th>
+                            <th>Alamat</th>
+                            <th>No HP</th>
                             <th>Role</th>
                             <th>Aksi</th>
                         </tr>
@@ -86,6 +88,8 @@
                             <td>{{$no++}}</td>
                             <td>{{$u->name}}</td>
                             <td>{{$u->email}}</td>
+                            <td>{{$u->no_hp}}</td>
+                            <td>{{$u->alamat}}</td>
                             <td>{{$u->role}}</td>
                             <td>
                             <a href="/admin/users/ubah/{{$u->id}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>

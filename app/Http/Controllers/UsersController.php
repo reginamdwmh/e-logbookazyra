@@ -36,6 +36,7 @@ class UsersController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
             'role' => $request->role,
         ]);
         Alert::success('Success', 'Data Berhasil Disimpan');
@@ -65,6 +66,7 @@ class UsersController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp,
                 'role' => $request->role
             ]);
         Alert::success('Success', 'Data Berhasil Diubah');

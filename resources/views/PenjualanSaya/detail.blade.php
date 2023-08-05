@@ -22,12 +22,12 @@
                                 <table id="example1" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th width="50px"><center>No</center></th>
+                                            <th><center>No</center></th>
                                             <th>Nama</th>
                                             <th><center>Jumlah</center></th>
                                             <th><center>Harga</center></th>
                                             <th>Catatan</th>
-                                            <th><center>Total</center></th>
+                                            <th>Total</center></th>
                                         </tr>
 
                                     </thead>
@@ -38,9 +38,9 @@
                                                 <td><center>{{ $no++ }}</center></td>
                                                 <td>{{ $item->nama_makanan }}</td>
                                                 <td><center>{{ number_format($item->jumlah, 0, ',', '.') }}</center></td>
-                                                <td><center>@currency($item->harga_satuan)</center></td>
+                                                <td align="right"><center>@currency($item->harga_satuan)</center></td>
                                                 <td>{{ $item->catatan }}</td>
-                                                <td><center>@currency($item->subtotal)</center></td>
+                                                <td align="right">@currency($item->subtotal)</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -62,7 +62,6 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Jenis Pembayaran : </label>
-                            <td>{{ $item->catatan }}</td>
                             @if ($item->jenis_pembayaran != '' || $item->jenis_pembayaran != null)
                                 <td>{{ $item->jenis_pembayaran }}</td>
                             @else

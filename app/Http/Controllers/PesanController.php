@@ -43,7 +43,8 @@ class PesanController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-                'alamat' => $request->alamat
+                'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp
             ]);
         Alert::success('Success', 'Profile Berhasil Diubah');
         return redirect()->back()->with(['users' => $users]);
