@@ -15,18 +15,9 @@
                     <form method="POST" action="{{ route('confirm') }}" enctype="multipart/form-data">
                         @csrf
                         <table class="table table-bordered table-striped">
-                            <tr>
-                                <td style="background-color:#fff;">
-                                    <select name="pembayaran" id="pembayaran" class="form-control" required>
-                                        <option value="">-Pilih Jenis Pembayaran-</option>
-                                        <option value="Transfer">Transfer</option>
-                                        <option value="COD">COD</option>
-                                    </select>
-                                </td>
-                                <td width="120" style="background-color:#fff; display: none;" id="image">
-                                    <input type="file" name="image">
-                                </td>
-                            </tr>
+                            
+                                
+                            
                         </table>
                         <br>
                         <div class="table-responsive">
@@ -80,8 +71,20 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-
                                 <tr>
+                                    <td style="background-color:#fff;" colspan="6">
+                                    <select name="pembayaran" id="pembayaran" class="form-control" required>
+                                        <option value="">-Pilih Jenis Pembayaran-</option>
+                                        <option value="Transfer">Transfer</option>
+                                        <option value="COD">COD</option>
+                                    </select>
+                                    </td>
+                                    <td style="background-color:#fff; display: none;" id="image">
+                                        <input type="file" name="image">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
                                     <td colspan="7">
                                         <div style="float:left;">
                                             <button type="submit" class="btn btn-primary"><i
