@@ -37,4 +37,24 @@ class LaporanDataPenjualanOnlineController extends Controller
         // dd($data_penjualan_detail);
         return view('public.checkout.detail', ['users' => $users, 'data_penjualan' => $data_penjualan, 'data_penjualan_detail' => $data_penjualan_detail]);
     }
+
+    public function cetaklaporantransaksipenjualanonline($tglawal, $tglakhir)
+    {
+
+        $users = UsersModel::select('*')
+            ->get();
+        
+        $tglawal = date('Y-m-d', strtotime($tglawal));
+        $tglakhir = date('Y-m-d', strtotime($tglakhir));
+        $tanggal = PesananModel::with('get_pesanandetail')->wherebetween(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), [$tglawal, $tglakhir])->get();
+        $user = Auth::user();
+        if ($user->role == 'admin') {
+            $pdf = PDF::loadView('admin.Laporan.LaporanDataPenjualanOnline.laporan', ['tanggal' => $tanggal, 'users' => $users], compact('tglawal', 'tglakhir'));
+            return $pdf->stream('Laporan-Data-Transaksi-Penjualan-Makanan-Online.pdf');
+        } else {
+
+            $pdf = PDF::loadView('Laporan.LaporanDataPenjualanOnline.laporan', ['tanggal' => $tanggal, 'users' => $users], compact('tglawal', 'tglakhir'));
+            return $pdf->stream('Laporan-Data-Transaksi-Penjualan-Makanan-Online.pdf');
+        }
+    }
 }

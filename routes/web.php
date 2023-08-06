@@ -135,6 +135,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/laporan/data-pemesanan-mitra', [LaporanDataPemesananMitraController::class, 'indexlaporanpemesananmitra'])->name('indexlaporanpemesananmitra');
     Route::get('/admin/laporan/data-pemesanan-mitra/cetak/{tglawal}/{tglakhir}', [LaporanDataPemesananMitraController::class, 'cetaklaporantransaksipemesananmitra'])->name('cetaklaporantransaksipemesananmitra');
 
+    // Tabel Laporan Penjualan Online
+    Route::get('/admin/laporan/data-penjualan-online', [LaporanDataPenjualanOnlineController::class, 'indexlaporanpenjualanonline'])->name('indexlaporanpenjualanonline');
+    Route::get('/admin/laporan/data-penjualan-online/cetak/{tglawal}/{tglakhir}', [LaporanDataPenjualanOnlineController::class, 'cetaklaporantransaksipenjualanonline'])->name('cetaklaporantransaksipenjualanonline');
+    Route::get('/admin/laporan/data-penjualan-online/detail/{id_pesanan}', [LaporanDataPenjualanOnlineController::class, 'detail_laporan_online'])->name('detail_laporan_online');
+    
     //Tabel Laporan Umum
     Route::get('/admin/laporan/data-umum', [LaporanDataUmumController::class, 'indexlaporanumum'])->name('indexlaporanumum');
     Route::get('/admin/laporan/data-umum/cetak/{tglawal}/{tglakhir}', [LaporanDataUmumController::class, 'cetaklaporantransaksiumum'])->name('cetaklaporantransaksiumum');

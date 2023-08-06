@@ -96,6 +96,7 @@
       }
     }
   </style>
+
   <title>@yield('title')</title>
   <link rel="icon" href="{{ asset('assets/AdminLTE/dist/img/e-booklogo.png')}}">
   @include('layouts.backend-dashboard.stylesheet')
