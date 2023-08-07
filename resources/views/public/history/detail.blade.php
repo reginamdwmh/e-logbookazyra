@@ -1,4 +1,4 @@
-@extends('layouts.backend-dashboard.app')
+@extends('layouts.backend-public.app')
 @section('title')
 
 @section('content')
@@ -98,18 +98,6 @@
         </div>
         <table class="table table-bordered table-striped">
             <tr>
-                <td width="150" style="background-color:#fff; vertical-align: middle">
-                    <div style="float:left;">
-                        <a href="/penjualan-saya/konfirmasi/{{ $data_penjualan->id_pesanan }}" class="btn btn-success">
-                            <i class="fa fa-check-circle"></i> Konfirmasi</a>
-                    </div>
-                </td>
-                <td width="120" style="background-color:#fff;vertical-align: middle">
-                    <div style="float:left;">
-                        <a href="/penjualan-saya/batal/{{ $data_penjualan->id_pesanan }}" class="btn btn-danger">
-                            <i class="fa fa-ban"></i> Batal</a>
-                    </div>
-                </td>
                 <td colspan="5">
                     <div style="float:right;">
                         <b>Sub Total :</b> @currency($data_penjualan->total - 7000)

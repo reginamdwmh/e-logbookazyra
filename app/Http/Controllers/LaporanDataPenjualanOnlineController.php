@@ -43,16 +43,19 @@ class LaporanDataPenjualanOnlineController extends Controller
 
         $users = UsersModel::select('*')
             ->get();
-        
+
         $tglawal = date('Y-m-d', strtotime($tglawal));
         $tglakhir = date('Y-m-d', strtotime($tglakhir));
         $tanggal = PesananModel::with('get_pesanandetail')->wherebetween(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), [$tglawal, $tglakhir])->get();
+        $pesanan_detail = PesananDetailModel::join('makanan', 'makanan.id_makanan', 'pesanan_detail.id_item')->select('pesanan_detail.*', 'makanan.nama_makanan')->get();
+        // dd($pesanan_detail);
         $user = Auth::user();
         if ($user->role == 'admin') {
-            $pdf = PDF::loadView('admin.Laporan.LaporanDataPenjualanOnline.laporan', ['tanggal' => $tanggal, 'users' => $users], compact('tglawal', 'tglakhir'));
+            $pdf = PDF::loadView('admin.Laporan.LaporanDataPenjualanOnline.laporan', ['tanggal' => $tanggal, 'users' => $users, 'pesanan_detail' => $pesanan_detail], compact('tglawal', 'tglakhir'));
             return $pdf->stream('Laporan-Data-Transaksi-Penjualan-Makanan-Online.pdf');
         } else {
 
+            // return view('Laporan.LaporanDataPenjualanOnline.laporan', ['tanggal' => $tanggal, 'users' => $users, 'pesanan_detail' => $pesanan_detail], compact('tglawal', 'tglakhir'));
             $pdf = PDF::loadView('Laporan.LaporanDataPenjualanOnline.laporan', ['tanggal' => $tanggal, 'users' => $users], compact('tglawal', 'tglakhir'));
             return $pdf->stream('Laporan-Data-Transaksi-Penjualan-Makanan-Online.pdf');
         }

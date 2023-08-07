@@ -164,6 +164,7 @@ class PesanController extends Controller
             ->get();
         $pesanan = PesananModel::where('user_id', Auth::user()->id)->where('status', 0)->first();
         $pesanan->status = 1;
+        $pesanan->total = $pesanan->total + 7000;
         $pesanan->update();
 
         $pesanan_detail = PesananDetailModel::where('id_pesanan', $pesanan->id_pesanan)->get();
@@ -290,16 +291,29 @@ class PesanController extends Controller
         // $makanan = MasterDataMakananModel::where('id_makanan', $id_makanan)->first();
         // $makanan = MasterDataMakananModel::join('kategori', 'makanan.nama_kategori', '=', 'kategori.nama_kategori')->where('id_makanan', $id_makanan)->first(['makanan.*', 'kategori.keterangan_kategori']);
         // dd($makanan);
-        $pesanan = DB::table('pesanan')->select(DB::raw('SUM(total) AS total'))->where('user_id', Auth::user()->id)->first();
-        if (!empty($pesanan)) {
-            $pesanan_detail = PesananDetailModel::join('makanan', 'pesanan_detail.id_item', '=', 'makanan.id_makanan')->where('user_id', Auth::user()->id)->get(['pesanan_detail.*', 'makanan.nama_makanan']);
-        }
+        // $pesanan = DB::table('pesanan')->select(DB::raw('SUM(total) AS total'))->where('user_id', Auth::user()->id)->first();
+        // if (!empty($pesanan)) {
+        //     $pesanan_detail = PesananDetailModel::join('makanan', 'pesanan_detail.id_item', '=', 'makanan.id_makanan')->where('user_id', Auth::user()->id)->get(['pesanan_detail.*', 'makanan.nama_makanan']);
+        // }
+        $data_penjualan_detail = PesananDetailModel::select('*')->where('user_id', Auth::user()->id)->get();
+        $data_penjualan = PesananModel::join('users', 'users.id', 'pesanan.user_id')->select('pesanan.*', 'users.*')->where('pesanan.user_id', Auth::user()->id)->orderBy('pesanan.created_at', 'DESC')->get();
+        // dd($data_penjualan_detail);
 
-        if (!empty($pesanan)) {
+        if (!empty($data_penjualan)) {
             // dd($total);
-            return view('public.history.index', ['users' => $users, 'pesanan' => $pesanan, 'pesanan_detail' => $pesanan_detail]);
+            return view('public.history.index', ['users' => $users, 'data_penjualan' => $data_penjualan, 'data_penjualan_detail' => $data_penjualan_detail]);
         } else {
             return view('public.history.index', compact('users'));
         }
+    }
+
+    public function detailhistory($id_pesanan)
+    {
+        $users = UsersModel::select('*')
+            ->get();
+        $data_penjualan_detail = PesananDetailModel::join('makanan', 'makanan.id_makanan', 'pesanan_detail.id_item')->select('pesanan_detail.*', 'makanan.nama_makanan')->where('id_pesanan', $id_pesanan)->get();
+        $data_penjualan = PesananModel::where('id_pesanan', $id_pesanan)->first();
+        // dd($data_penjualan_detail);
+        return view('public.history.detail', ['users' => $users, 'data_penjualan' => $data_penjualan, 'data_penjualan_detail' => $data_penjualan_detail]);
     }
 }

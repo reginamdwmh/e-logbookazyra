@@ -293,4 +293,5 @@ Route::group(['middleware' => ['auth', 'role:public']], function () {
     Route::post('/public/checkout/confirm', [PesanController::class, 'confirm'])->name('confirm');
     Route::post('/public/checkout/update_to_cart', [PesanController::class, 'update_to_cart'])->name('update_to_cart');
     Route::get('/public/history', [PesanController::class, 'indexhistory'])->name('indexhistory');
+    Route::get('/public/history/detail/{id_pesanan}', [PesanController::class, 'detailhistory'])->name('detailhistory');
 });

@@ -19,7 +19,7 @@
     #myImg:hover {opacity: 0.7;}
 
     /* The Modal (background) */
-    .modal {
+    .gambar_detail {
       display: none; /* Hidden by default */
       position: fixed; /* Stay in place */
       z-index: 1; /* Sit on top */

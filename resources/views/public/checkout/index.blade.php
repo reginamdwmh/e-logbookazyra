@@ -86,12 +86,16 @@
                                 <tr>
                                     
                                     <td colspan="7">
-                                        <div style="float:left;">
+                                        <div style="float:left; vertical-align: middle">
                                             <button type="submit" class="btn btn-primary"><i
                                                     class="fas fa-shopping-cart"></i> Checkout</button>
                                         </div>
                                         <div style="float:right;">
-                                            <b>Grand Total :</b> @currency($pesanan->total)
+                                            <b>Sub Total :</b> @currency($pesanan->total)
+                                            <br>
+                                            <b>Ongkir :</b> @currency(7000)
+                                            <br>
+                                            <b>Grand Total :</b> @currency($pesanan->total + 7000)
                                         </div>
                                     </td>
                                 </tr>

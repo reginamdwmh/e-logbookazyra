@@ -63,19 +63,22 @@
                 <td></td>
                 <td>
                     <ul>
-                        @foreach ( $t->get_pesanandetail as $tgp)
-                        {{$tgp->jenis_pembayaran}}
-                        @endforeach
+                        {{-- @foreach ($t->get_pesanandetail as $tgp)
+                    {{$tgp->jenis_pembayaran}}
+                    @endforeach --}}
+                        {{ $t->get_pesanandetail[0]->jenis_pembayaran }}
                     </ul>
-                </td>  
+                </td>
                 <td>
-                    
                     <ul>
-                        @foreach ( $t->get_pesanandetail as $tgp)
-                        <li>{{$tgp->jumlah}} : </li>
+                        {{-- @foreach ($t->get_pesanandetail as $tgp) --}}
+                        @foreach ($pesanan_detail as $pd)
+                            @if ($pd->id_pesanan == $t->id_pesanan)
+                                <li>{{ $pd->jumlah }} : {{ $pd->nama_makanan }}</li>
+                            @endif
                         @endforeach
+                        {{-- @endforeach --}}
                     </ul>
-                    
                 </td>
                 @php
                     $total_akhir += $t->total;

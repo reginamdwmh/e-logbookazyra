@@ -58,7 +58,9 @@
                       ->first();
                   
                   if (!empty($pesanan)) {
-                      $total = \App\Models\PesananDetailModel::where('id_pesanan', $pesanan->id_pesanan)->count();
+                      // $total = \App\Models\PesananDetailModel::where('id_pesanan', $pesanan->id_pesanan)->count();
+                      $total = \App\Models\PesananModel::where('status', 1)
+                      ->count();
                   } else {
                       $total = 0;
                   }
