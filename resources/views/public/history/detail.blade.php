@@ -102,7 +102,7 @@
                     <div style="float:right;">
                         <b>Sub Total :</b> @currency($data_penjualan->total - 7000)
                         <br>
-                        <b>Ongkir :</b> @currency(7000)
+                        <b>Ongkir :</b> @currency(7000) <br><small style="color: red;">*) Ongkir berlaku di wilayah Banjarbaru</small>
                         <br>
                         <b>Grand Total :</b> @currency($data_penjualan->total)
                     </div>

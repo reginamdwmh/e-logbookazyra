@@ -75,8 +75,8 @@
         </tbody>
     </table>
     <br><br>
-    <div id="piechart" style="width: 900px; height: 500px"></div>
-    <br><br>
+    {{-- <div id="piechart" style="width: 900px; height: 500px"></div>
+    <br><br> --}}
 
     <div style="text-align: left; display: inline-block; float: right; margin-right: 50px;">
         <label>
@@ -98,40 +98,3 @@
 </body>
 
 </html>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        google.charts.load('current', {
-            'packages': ['corechart']
-        });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            // Set Data
-            var data = google.visualization.arrayToDataTable([
-                ['Makanan', 'Total'],
-
-                @php
-                    foreach ($hasil_chart as $d) {
-                        echo "['" . $d->nama_makanan . "'," . $d->total_barang_terlaris . '],';
-                    }
-                @endphp
-            ]);
-            // Set Options
-            var options = {
-                title: 'Total Penjualan Terlaris',
-                is3D: true,
-            };
-            // Draw
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-            chart.draw(data, options);
-        }
-
-    })
-</script>

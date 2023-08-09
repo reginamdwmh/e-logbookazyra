@@ -106,7 +106,7 @@
                 </td>
                 <td width="120" style="background-color:#fff;vertical-align: middle">
                     <div style="float:left;">
-                        <a href="/penjualan-saya/batal/{{ $data_penjualan->id_pesanan }}" class="btn btn-danger">
+                        <a href="" data-toggle="modal" data-target="#batal_modal" class="btn btn-danger">
                             <i class="fa fa-ban"></i> Batal</a>
                     </div>
                 </td>
@@ -114,7 +114,8 @@
                     <div style="float:right;">
                         <b>Sub Total :</b> @currency($data_penjualan->total - 7000)
                         <br>
-                        <b>Ongkir :</b> @currency(7000)
+                        <b>Ongkir :</b> @currency(7000) <br><small style="color: red;">*) Ongkir berlaku di wilayah
+                            Banjarbaru</small>
                         <br>
                         <b>Grand Total :</b> @currency($data_penjualan->total)
                     </div>
@@ -128,6 +129,32 @@
             </tr>
         </table>
         @endif
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="batal_modal" tabindex="-1" aria-labelledby="batal_modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="batal_modalLabel">Form Batal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="{{ url('/penjualan-saya/batal') }}/{{ $data_penjualan->id_pesanan }}">
+                        @csrf
+                        <div class="modal-body">
+                            Alasan Batal
+                            <textarea class="form-control" aria-label="With textarea" name="catatan" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-ban"></i> Konfirmasi
+                                Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
 

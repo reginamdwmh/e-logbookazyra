@@ -41,7 +41,7 @@
                             {{-- <a href="/master-data/data-bahan/lihat/{{$b->id_bahan}}" title="Lihat" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> --}}
                              <a href="/master-data/data-bahan/ubah/{{$b->id_bahan}}" title="Ubah" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                              <a href="/master-data/data-bahan/hapus/{{$b->id_bahan}}" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');" title="Hapus" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                            </center></td>
+                            </center></td>                        
                          </tr>
              
                          @endforeach

@@ -59,9 +59,9 @@ class DashboardController extends Controller
     {
         $users = UsersModel::select('*')
             ->get();
-            $data_penjualan_detail = PesananDetailModel::select('*')->get();
+        $data_penjualan_detail = PesananDetailModel::select('*')->get();
         $data_penjualan = PesananModel::join('users', 'users.id', 'pesanan.user_id')->select('pesanan.*', 'users.*')->where('status', '1')->orderBy('pesanan.created_at', 'DESC')->get();
-        
+
         // dd($data_penjualan);
         return view('PenjualanSaya.index', ['users' => $users, 'data_penjualan' => $data_penjualan, 'data_penjualan_detail' => $data_penjualan_detail]);
     }
@@ -90,13 +90,15 @@ class DashboardController extends Controller
         // dd($pesanan);
     }
 
-    public function batal($id_pesanan)
+    public function batal($id_pesanan, Request $request)
     {
+        // dd($request);
         $users = UsersModel::select('*')
             ->get();
 
         $pesanan = PesananModel::where([['id_pesanan', $id_pesanan], ['status', 1]])->first();
         $pesanan_detail = PesananDetailModel::where('id_pesanan', $pesanan->id_pesanan)->get();
+        $pesanan->catatan = $request->catatan;
         $pesanan->status = 3;
         $pesanan->update();
 
@@ -120,7 +122,7 @@ class DashboardController extends Controller
                         Alert::error('Error', 'Stok Habis');
                         return redirect()->back()->with(['users' => $users]);
                     }
-                }else {
+                } else {
                     $datastok = MasterDataMakananModel::join('stok_frozen_food', 'stok_frozen_food.id_makanan', '=', 'makanan.id_makanan')->select('stok_frozen_food.stok_masuk', 'stok_frozen_food.stok_keluar')->where('stok_frozen_food.id_makanan', $value->id_item)->first();
                     $stok = $datastok->stok_masuk - $datastok->stok_keluar;
 

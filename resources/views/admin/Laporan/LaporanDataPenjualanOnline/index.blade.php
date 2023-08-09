@@ -75,13 +75,26 @@
                                         <center>@currency($item->total)</center>
                                     </td>
                                     @if ($item->status == 0)
-                                        <td><center><span class="badge badge-secondary">Belum Checkout</span></center></td>
+                                        <td>
+                                            <center><span class="badge badge-secondary">Belum Checkout</span></center>
+                                        </td>
                                     @elseif($item->status == 1)
-                                        <td><center><span class="badge badge-primary">Checkout</span></center></td>
+                                        <td>
+                                            <center><span class="badge badge-primary">Checkout</span></center>
+                                        </td>
                                     @elseif($item->status == 2)
-                                        <td><center><span class="badge badge-success">Konfirmasi</span></center></td>
+                                        <td>
+                                            <center><span class="badge badge-success">Konfirmasi</span></center>
+                                        </td>
+                                    @elseif($item->status == 4)
+                                        <td>
+                                            <center><span class="badge badge-warning">Selesai</span></center>
+                                        </td>
                                     @else
-                                        <td><span class="badge badge-danger">Batal</span></td>
+                                        <td>
+                                            <center><span class="badge badge-danger">Batal<br>Keterangan :
+                                                    {{ $item->catatan }}</span></center>
+                                        </td>
                                     @endif
                                     <td>
                                         <center>

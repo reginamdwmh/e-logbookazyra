@@ -172,7 +172,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::get('/penjualan-saya', [DashboardController::class, 'indexpenjualansaya'])->name('indexpenjualansaya');
     Route::get('/penjualan-saya/detail/{id_pesanan}', [DashboardController::class, 'detail'])->name('detail');
     Route::get('/penjualan-saya/konfirmasi/{id_pesanan}', [DashboardController::class, 'konfirmasi'])->name('konfirmasi');
-    Route::get('/penjualan-saya/batal/{id_pesanan}', [DashboardController::class, 'batal'])->name('batal');
+    Route::post('/penjualan-saya/batal/{id_pesanan}', [DashboardController::class, 'batal'])->name('batal');
     // Route::get('/user/profile/{id}',[DashboardController::class,'profile']);
     // Route::get('/user/profile/ubah/{id}',[DashboardController::class,'ubahprofile']);
     // Route::get('/user/profile/update',[DashboardController::class,'updateprofile']);
@@ -294,4 +294,5 @@ Route::group(['middleware' => ['auth', 'role:public']], function () {
     Route::post('/public/checkout/update_to_cart', [PesanController::class, 'update_to_cart'])->name('update_to_cart');
     Route::get('/public/history', [PesanController::class, 'indexhistory'])->name('indexhistory');
     Route::get('/public/history/detail/{id_pesanan}', [PesanController::class, 'detailhistory'])->name('detailhistory');
+    Route::get('/public/history/selesai/{id_pesanan}', [PesanController::class, 'selesaihistory'])->name('selesaihistory');
 });

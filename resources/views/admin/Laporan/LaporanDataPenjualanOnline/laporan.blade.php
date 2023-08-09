@@ -60,7 +60,7 @@
             <tr>
                 <td><center>{{$no++}}</center></td>
                 <td><center>{{tanggal_indo(date('d-m-Y',strtotime($t->created_at)))}}</center></td>  
-                <td></td>
+                <td>{{ $t->name }}</td>
                 <td>
                     <ul>
                         {{-- @foreach ($t->get_pesanandetail as $tgp)

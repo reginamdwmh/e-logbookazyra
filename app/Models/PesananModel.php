@@ -10,7 +10,7 @@ class PesananModel extends Model
     use HasFactory;
     protected $table ='pesanan';
     protected $primaryKey = 'id_pesanan';
-    protected $fillable = ['user_id','tanggal','status','total'];
+    protected $fillable = ['user_id','tanggal','status','total', 'catatan'];
 
 
     public function get_pesanandetail(){  

@@ -72,20 +72,15 @@
                                     @endforeach
                                 </tbody>
                                 <tr>
-                                    <td style="background-color:#fff; vertical-align: middle" colspan="6">
+                                    <td style="background-color:#fff;" colspan="6">
                                     <select name="pembayaran" id="pembayaran" class="form-control" required>
                                         <option value="">-Pilih Jenis Pembayaran-</option>
                                         <option value="Transfer">Transfer</option>
                                         <option value="COD">COD</option>
                                     </select>
                                     </td>
-                                    <td style="background-color:#fff; display: none; " id="image">
+                                    <td style="background-color:#fff; display: none;" id="image">
                                         <input type="file" name="image">
-                                        <small style="color: rgb(12, 10, 10);">No Rekening A.n Azyra : 
-                                            <li>BNI : xxxxxxxxxx</li>
-                                            <li>Mandiri :  xxxxxxxxxxxxx</li>
-                                            <li>Shopeepay :  0853-4895-1790</li>
-                                        </small>
                                     </td>
                                 </tr>
                                 <tr>
@@ -98,7 +93,7 @@
                                         <div style="float:right;">
                                             <b>Sub Total :</b> @currency($pesanan->total)
                                             <br>
-                                            <b>Ongkir :</b> @currency(7000)
+                                            <b>Ongkir :</b> @currency(7000) <br><small style="color: red;">*) Ongkir berlaku di wilayah Banjarbaru</small>
                                             <br>
                                             <b>Grand Total :</b> @currency($pesanan->total + 7000)
                                         </div>
