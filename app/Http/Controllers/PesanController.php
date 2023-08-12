@@ -54,7 +54,7 @@ class PesanController extends Controller
     {
         $users = UsersModel::select('*')
             ->get();
-        if ((Auth::user()->nohp == null || Auth::user()->nohp == '') || (Auth::user()->alamat == null || Auth::user()->alamat == '')) {
+        if ((Auth::user()->no_hp == null || Auth::user()->no_hp == '') || (Auth::user()->alamat == null || Auth::user()->alamat == '')) {
             Alert::error('Error', 'No. HP atau Alamat belum diisi');
             return redirect()->back()->with(['users' => $users]);
         } else {

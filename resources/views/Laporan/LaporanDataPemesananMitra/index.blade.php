@@ -41,7 +41,7 @@
                         <tr>
                             <th width="50px"><center>No</center></th>
                             <th>Kode Pemesanan</th>
-                            <th>Keterangan Pemesanan</th>
+                            <th><center>Keterangan Pemesanan</center></th>
                             <th><center>Komisi</center></th>
                             <th><center>Pendapatan</center></th>
                             <th><center>Tanggal</center></th>
