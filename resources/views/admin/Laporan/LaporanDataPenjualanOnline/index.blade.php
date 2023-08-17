@@ -98,7 +98,7 @@
                                     @endif
                                     <td>
                                         <center>
-                                            <a href="/laporan/data-penjualan-online/detail/{{ $item->id_pesanan }}"
+                                            <a href="/admin/laporan/data-penjualan-online/detail/{{ $item->id_pesanan }}"
                                                 title="Detail" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                                         </center>
                                     </td>

@@ -35,7 +35,13 @@ class LaporanDataPenjualanOnlineController extends Controller
         $data_penjualan_detail = PesananDetailModel::join('makanan', 'makanan.id_makanan', 'pesanan_detail.id_item')->select('pesanan_detail.*', 'makanan.nama_makanan')->where('id_pesanan', $id_pesanan)->get();
 
         // dd($data_penjualan_detail);
-        return view('public.checkout.detail', ['users' => $users, 'data_penjualan' => $data_penjualan, 'data_penjualan_detail' => $data_penjualan_detail]);
+        $user = Auth::user();
+        if ($user->role == 'admin') {
+            return view('admin.Laporan.LaporanDataPenjualanOnline.detail', ['users' => $users, 'data_penjualan' => $data_penjualan, 'data_penjualan_detail' => $data_penjualan_detail]);
+        } else if ($user->role == 'user') {
+            return view('Laporan.LaporanDataPenjualanOnline.detail', ['users' => $users, 'data_penjualan' => $data_penjualan, 'data_penjualan_detail' => $data_penjualan_detail]);
+        }
+        
     }
 
     public function cetaklaporantransaksipenjualanonline($tglawal, $tglakhir)

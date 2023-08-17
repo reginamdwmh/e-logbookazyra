@@ -44,7 +44,7 @@
               </div>
               <div class="form-group">
                 <label>No HP</label>
-                <input type="number" name="no_hp" class="form-control" placeholder="No HP" required>
+                <input type="number" name="no_hp" class="form-control" placeholder="No HP" required value="{{ $u->no_hp }}">
               </div>
                 <div class="form-group">
                   <label>Role</label>
@@ -55,6 +55,9 @@
                     @endif
                     @if( $u->role == "user") echo "<option value='user' selected>user</option>";
                     @else echo "<option value='user'>user</option>";
+                    @endif
+                    @if( $u->role == "public") echo "<option value='public' selected>public</option>";
+                    @else echo "<option value='public'>public</option>";
                     @endif
                   </select>
                 </div>

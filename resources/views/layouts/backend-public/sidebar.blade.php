@@ -103,8 +103,19 @@
                     <li class="nav-item">
                       <a href="/public/history" class="nav-link">
                           <i class="nav-icon fa fa-history"></i>
+
+                          <?php
+                            $total = 0;
+                            $data_penjualan_detail = \App\Models\PesananModel::where('user_id', Auth::user()->id)->where('status', 2)->first();
+                            
+                            if (!empty($data_penjualan_detail)) {
+                              $total = \App\Models\PesananModel::where('status', 2)->count();
+                            } else {
+                                $total = 0;
+                            }
+                            ?>
                           <p>
-                              Riwayat Pesanan
+                              Riwayat Pesanan <span class="badge badge-danger">{{ $total }}</span>
                           </p>
                       </a>
                   </li>

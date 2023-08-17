@@ -5,16 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\Request;
 use App\Models\UsersModel;
+use Barryvdh\DomPDF\Facade\PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UsersController extends Controller
 {
-    // public function index()
-    // {
-    //     return view ('admin.users.index');
-    // }
-
-    public function index()
+     public function index()
     {
         $users = UsersModel::select('*')
             ->get();
@@ -45,6 +41,8 @@ class UsersController extends Controller
 
     public function hapususers($id)
     {
+        $users = UsersModel::where('id', $id)
+            ->delete();
         Alert::success('Success', 'Data Berhasil Dihapus');
         return redirect()->route('index');
     }
@@ -72,4 +70,13 @@ class UsersController extends Controller
         Alert::success('Success', 'Data Berhasil Diubah');
         return redirect()->route('index', ['users' => $users]);
     }
+
+    // public function cetakusers()
+    // {
+    //     $users = UsersModel::select('*')
+    //             ->get();
+        
+    //     $pdf = PDF::loadView('Users.laporan',['users'=>$users]);
+    //     return $pdf->stream('Laporan-Data-Users.pdf');
+    // }
 }
