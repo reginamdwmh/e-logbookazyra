@@ -169,9 +169,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @foreach ($data_penjualan_detail as $item)
-                            <img src="{{ asset('storage/' . $item->image) }}" class="rounded mx-auto d-block">
-                        @endforeach
+                        <img src="{{ asset('storage/' . $data_penjualan_detail[0]->image) }}" class="rounded mx-auto d-block">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

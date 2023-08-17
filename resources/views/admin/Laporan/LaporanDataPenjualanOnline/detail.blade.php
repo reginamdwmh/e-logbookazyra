@@ -120,33 +120,6 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="batal_modal" tabindex="-1" aria-labelledby="batal_modalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="batal_modalLabel">Form Batal</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="post" action="{{ url('/penjualan-saya/batal') }}/{{ $data_penjualan->id_pesanan }}">
-                        @csrf
-                        <div class="modal-body">
-                            Alasan Batal
-                            <textarea class="form-control" aria-label="With textarea" name="catatan" required></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-ban"></i> Konfirmasi
-                                Batal</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Modal -->
         <div class="modal fade" id="detail_gambar" tabindex="-1" aria-labelledby="detail_gambarLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-xl">
                 <div class="modal-content">
@@ -157,9 +130,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @foreach ($data_penjualan_detail as $item)
-                            <img src="{{ asset('storage/' . $item->image) }}" class="rounded mx-auto d-block">
-                        @endforeach
+                        <img src="{{ asset('storage/' . $data_penjualan_detail[0]->image) }}" class="rounded mx-auto d-block">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
