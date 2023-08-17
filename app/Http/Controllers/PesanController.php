@@ -301,7 +301,7 @@ class PesanController extends Controller
         //     $pesanan_detail = PesananDetailModel::join('makanan', 'pesanan_detail.id_item', '=', 'makanan.id_makanan')->where('user_id', Auth::user()->id)->get(['pesanan_detail.*', 'makanan.nama_makanan']);
         // }
         $data_penjualan_detail = PesananDetailModel::select('*')->where('user_id', Auth::user()->id)->get();
-        $data_penjualan = PesananModel::join('users', 'users.id', 'pesanan.user_id')->select('pesanan.*', 'users.*')->where('pesanan.user_id', Auth::user()->id)->where('user_id', Auth::user()->id)->orderBy('pesanan.created_at', 'DESC')->get();
+        $data_penjualan = PesananModel::join('users', 'users.id', 'pesanan.user_id')->select('pesanan.*', 'users.*')->where('pesanan.user_id', Auth::user()->id)->orderBy('pesanan.created_at', 'DESC')->get();
         // dd($data_penjualan_detail);
 
         if (!empty($data_penjualan)) {

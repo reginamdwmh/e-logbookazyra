@@ -52,7 +52,7 @@ class LaporanDataPenjualanOnlineController extends Controller
 
         $tglawal = date('Y-m-d', strtotime($tglawal));
         $tglakhir = date('Y-m-d', strtotime($tglakhir));
-        $tanggal = PesananModel::with('get_pesanandetail')->join('users', 'users.id', 'pesanan.user_id')->wherebetween(DB::raw("DATE_FORMAT(pesanan.created_at, '%Y-%m-%d')"), [$tglawal, $tglakhir])->get();
+        $tanggal = PesananModel::with('get_pesanandetail')->join('users', 'users.id', 'pesanan.user_id')->wherebetween(DB::raw("DATE_FORMAT(pesanan.created_at, '%Y-%m-%d')"), [$tglawal, $tglakhir])->where('status', 4)->get();
         $pesanan_detail = PesananDetailModel::join('makanan', 'makanan.id_makanan', 'pesanan_detail.id_item')->select('pesanan_detail.*', 'makanan.nama_makanan')->get();
         // dd($tanggal);
         $user = Auth::user();

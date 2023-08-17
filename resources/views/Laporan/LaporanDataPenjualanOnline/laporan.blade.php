@@ -65,7 +65,9 @@
                         <center>{{ $no++ }}</center>
                     </td>
                     <td>
-                        <center>{{ tanggal_indo(date('d-m-Y', strtotime($t->created_at))) }}</center>
+                        
+                        <center>{{ tanggal_indo(date('d-m-Y', strtotime($t->get_pesanandetail[0]->created_at))) }}</center>
+                        
                     </td>
                     <td>{{ $t->name }}</td>
                     <td>
