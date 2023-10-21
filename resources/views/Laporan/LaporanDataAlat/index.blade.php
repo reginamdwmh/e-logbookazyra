@@ -43,7 +43,7 @@
                     <thead>
                         <tr>
                             <th width="50px"><center>No</center></th>
-                            <th>Nama Alat</th>
+                            <th><center>Nama Alat</center></th>
                             <th><center>Harga</center></th>
                             <th><center>Jumlah</center></th>
                             <th><center>Total</center></th>

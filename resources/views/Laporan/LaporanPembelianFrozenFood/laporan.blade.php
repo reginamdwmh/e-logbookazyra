@@ -59,20 +59,20 @@
             @foreach($tanggal as $t) 
             <tr>
                 <td><center>{{$no++}}</center></td>
-                <td><center>{{tanggal_indo(date('d-m-Y',strtotime($t->created_at)))}}</center></td>    
+                <td>{{tanggal_indo(date('d-m-Y',strtotime($t->created_at)))}}</td>    
                 <td>{{$t->nama_makanan}}</td>
-                <td><center>@currency($t->harga)</center></td>
-                <td><center>{{$t->jumlah}}</center></td>
+                <td align="right">@currency($t->harga)</td>
+                <td align="right">{{$t->jumlah}}</td>
                 @php
                     $total_akhir += $t->total;
                 @endphp
-                <td><center>@currency($t->total)</center></td>
+                <td align="right">@currency($t->total)</td>
             </tr>
             @endforeach
             <tr>
                 
                 <td colspan="5"><center>Total Keseluruhan</center></td>
-                <td><center>Rp.{{ number_format($total_akhir) }}</center></td>
+                <td align="right">Rp.{{ number_format($total_akhir) }}</td>
             
             </tr>
         </tbody>       

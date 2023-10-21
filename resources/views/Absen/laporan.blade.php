@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
-    <title>Data Transaksi Alat</title>
+    <title>Data Absen</title>
 </head>
+    
 
+
+ 
 <body>
     <table border="0" align="center" width="100%">
         <tr align="center">
@@ -24,7 +27,7 @@
     <br>
 
     <div style="text-align: center;">
-        <font size="5"><b>LAPORAN DATA TRANSAKSI ALAT</b></font><br>
+        <font size="5"><b>LAPORAN ABSEN</b></font><br>
     </div>
        
     <br>
@@ -34,8 +37,6 @@
             <font style="margin-right: 120px;" size="3">Staff / user : <span class="gray-color">{{ $u->name }}</span></font><br>
             @endif
         @endforeach
-            
-        <font style="margin-right: 120px;" size="3">Tanggal Cut Off : {{ date('d F Y', strtotime($tglawal)) }} s/d {{ date('d F Y', strtotime($tglakhir)) }} <span class="gray-color"></span></font><br>
         
     </div>
     <div style="clear: both;"></div>
@@ -43,12 +44,10 @@
     <table border="1" cellspacing="0" width="100%">
         <thead style="background-color: #f5b2bb; text-align: center;">
         <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Nama Alat</th>
-                <th>Harga</th>
-                <th>Jumlah</th>
-                <th>Total</th>
+            <th><center>No</center></th>
+            <th>NIS</th>
+            <th><center>Keterangan</center></th>
+            <th><center>Tanggal</center></th>
                 
             @php
                 $total_akhir = 0;
@@ -57,25 +56,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($tanggal as $t) 
+            @foreach($absen as $b) 
             <tr>
-                <td><center>{{$no++}}</center></td>
-                <td>{{tanggal_indo(date('d-m-Y',strtotime($t->created_at)))}}</td>    
-                <td align="right">{{$t->nama_alat}}</td>
-                <td align="right">@currency($t->harga)</td>
-                <td align="right">{{$t->jumlah}}</td>
-                @php
-                    $total_akhir += $t->total;
-                @endphp
-                <td align="right">@currency($t->total)</td>
+                <td>{{$no++}}</td>
+                <td>{{$b->NIS}}</td>
+                <td>{{$b->keterangan}}</td>
+                <td>{{$b->tanggal}}</td>
             </tr>
             @endforeach
-            <tr>
-                
-                <td colspan="5"><center>Total Keseluruhan</center></td>
-                <td align="right">Rp.{{ number_format($total_akhir) }}</td>
-            
-            </tr>
+           
         </tbody>    
         </table>
         <br><br>

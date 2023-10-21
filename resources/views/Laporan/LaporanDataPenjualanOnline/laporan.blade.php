@@ -66,7 +66,7 @@
                     </td>
                     <td>
                         
-                        <center>{{ tanggal_indo(date('d-m-Y', strtotime($t->get_pesanandetail[0]->created_at))) }}</center>
+                        {{ tanggal_indo(date('d-m-Y', strtotime($t->get_pesanandetail[0]->created_at))) }}
                         
                     </td>
                     <td>{{ $t->name }}</td>
@@ -92,8 +92,8 @@
                     @php
                         $total_akhir += $t->total;
                     @endphp
-                    <td>
-                        <center>@currency($t->total)</center>
+                    <td align="right">
+                        @currency($t->total)
                     </td>
                 </tr>
             @endforeach

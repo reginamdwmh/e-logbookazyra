@@ -4,6 +4,7 @@ use App\Models\UsersModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\MasterDataMakananModel;
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\UsersController;
@@ -177,6 +178,14 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     // Route::get('/user/profile/ubah/{id}',[DashboardController::class,'ubahprofile']);
     // Route::get('/user/profile/update',[DashboardController::class,'updateprofile']);
     Route::get('/contact', [ContactController::class, 'index']);
+
+    Route::get('/absen', [AbsenController::class, 'indexabsen'])->name('indexabsen');
+    Route::get('/absen/tambah', [AbsenController::class, 'tambahabsen'])->name('tambahabsen');
+    Route::post('/absen/simpan', [AbsenController::class, 'simpanabsen'])->name('simpanabsen');
+    Route::get('/absen/ubah/{id}', [AbsenController::class, 'ubahabsen'])->name('ubahabsen');
+    Route::post('/absen/update', [AbsenController::class, 'updateabsen'])->name('updateabsen');
+    Route::get('/absen/hapus/{id}', [AbsenController::class, 'hapusabsen'])->name('hapusabsen');
+    Route::get('/absen/cetak', [AbsenController::class, 'cetaklaporanabsen'])->name('cetaklaporanabsen');
 
 
     //Tabel Transaksi Alat

@@ -61,22 +61,22 @@
             @foreach($tanggal as $t) 
             <tr>
                 <td><center>{{$no++}}</center></td>
-                <td><center>{{tanggal_indo(date('d-m-Y',strtotime($t->created_at)))}}</center></td>    
+                <td>{{tanggal_indo(date('d-m-Y',strtotime($t->created_at)))}}</td>    
                 <td><center>{{$t->kode_pemesanan}}</center></td>
                 <td><center>{{$t->keterangan_pemesanan}}</center></td>
                 @php
                     $komisi_akhir += $t->komisi;
                     $pendapatan_akhir += $t->total;
                 @endphp
-                <td><center>@currency($t->komisi)</center></td>
-                <td><center>@currency($t->total)</center></td>
+                <td align="right">@currency($t->komisi)</td>
+                <td align="right">@currency($t->total)</td>
             </tr>
             @endforeach
             <tr>
                 
                 <td colspan="4"><center>Total Keseluruhan</center></td>
-                <td><center>Rp.{{ number_format($komisi_akhir) }}</center></td>
-                <td><center>Rp.{{ number_format($pendapatan_akhir) }}</center></td>
+                <td align="right">Rp.{{ number_format($komisi_akhir) }}</td>
+                <td align="right">Rp.{{ number_format($pendapatan_akhir) }}</td>
             
             </tr>
         </tbody>

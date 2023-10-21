@@ -50,6 +50,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="/absen" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Absen
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="/penjualan-saya" class="nav-link">
             <i class="nav-icon fa fa-cart-arrow-down"></i>
             <?php

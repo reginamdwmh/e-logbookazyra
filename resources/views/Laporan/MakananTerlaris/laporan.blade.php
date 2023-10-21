@@ -64,11 +64,11 @@
                         <center>{{ $no++ }}</center>
                     </td>
                     <td>{{ $t->nama_makanan }}</td>
-                    <td>
-                        <center>@currency($t->harga)</center>
+                    <td align="right">
+                        @currency($t->harga)
                     </td>
                     <td>
-                        <center>{{ $t->total_barang_terlaris }}<center>
+                        <center>{{ $t->total_barang_terlaris }}</center>
                     </td>
                 </tr>
             @endforeach
