@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 use PhpParser\Node\NullableType;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\MasterDataMakananModel;
+use App\Models\ShiftModel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -18,14 +20,30 @@ class DashboardController extends Controller
     {
         $users = UsersModel::select('*')
             ->get();
-        return view('Dashboard.index', ['users' => $users]);
+        $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+        $stok = DB::select($query_stok);
+        return view('Dashboard.index', ['users' => $users, 'stok' => $stok]);
     }
 
     public function admin()
     {
         $users = UsersModel::select('*')
             ->get();
-        return view('admin.index', ['users' => $users]);
+        $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+        $stok = DB::select($query_stok);
+        return view('admin.index', ['users' => $users, 'stok' => $stok]);
     }
 
     public function public()
@@ -34,7 +52,15 @@ class DashboardController extends Controller
             ->get();
         $makanan = MasterDataMakananModel::select('*')
             ->get();
-        return view('public.index', ['users' => $users, 'makanan' => $makanan]);
+        $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+        $stok = DB::select($query_stok);
+        return view('public.index', ['users' => $users, 'makanan' => $makanan, 'stok' => $stok]);
     }
 
     public function makanan_minuman()
@@ -43,7 +69,15 @@ class DashboardController extends Controller
             ->get();
         $makanan = MasterDataMakananModel::select('*')
             ->where('nama_kategori', '<>', 'Frozen Food')->get();
-        return view('public.index', ['users' => $users, 'makanan' => $makanan]);
+        $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+        $stok = DB::select($query_stok);
+        return view('public.index', ['users' => $users, 'makanan' => $makanan, 'stok' => $stok]);
     }
 
     public function frozen_food()
@@ -52,7 +86,15 @@ class DashboardController extends Controller
             ->get();
         $makanan = MasterDataMakananModel::select('*')
             ->where('nama_kategori', '=', 'Frozen Food')->get();
-        return view('public.index', ['users' => $users, 'makanan' => $makanan]);
+        $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+        $stok = DB::select($query_stok);
+        return view('public.index', ['users' => $users, 'makanan' => $makanan, 'stok' => $stok]);
     }
 
     public function indexpenjualansaya()
@@ -84,6 +126,13 @@ class DashboardController extends Controller
         $pesanan = PesananModel::where([['id_pesanan', $id_pesanan], ['status', 1]])->first();
         $pesanan->status = 2;
         $pesanan->update();
+
+        $date_now = date('Ymd');
+        $kas = ShiftModel::where(DB::raw("DATE_FORMAT(created_at, '%Y%m%d')"), $date_now)
+            ->where('id_user', Auth::user()->id)
+            ->first();
+        $kas->kas_update = $pesanan->total;
+        $kas->update();
 
         Alert::success('Success', 'Data Berhasil di Konfirmasi');
         return redirect()->route('indexpenjualansaya', ['users' => $users]);

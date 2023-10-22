@@ -38,8 +38,8 @@
                         class="gray-color">{{ $u->name }}</span></font><br>
             @endif
         @endforeach
-        <font style="margin-right: 120px;" size="3">Tanggal Cut Off : {{ date('d F Y', strtotime($tglawal)) }} s/d
-            {{ date('d F Y', strtotime($tglakhir)) }} <span class="gray-color"></span></font><br>
+        <font style="margin-right: 120px;" size="3">Tanggal Cut Off : {{ tanggal_indo(date('d-m-Y',strtotime($tglawal))) }} s/d
+            {{ tanggal_indo(date('d-m-Y',strtotime($tglakhir))) }} <span class="gray-color"></span></font><br>
     </div>
     <div style="clear: both;"></div>
     <br>

@@ -26,6 +26,14 @@ class PesanController extends Controller
             ->get();
         // $makanan = MasterDataMakananModel::where('id_makanan', $id_makanan)->first();
         $makanan = MasterDataMakananModel::join('kategori', 'makanan.nama_kategori', '=', 'kategori.nama_kategori')->where('id_makanan', $id_makanan)->first(['makanan.*', 'kategori.keterangan_kategori']);
+        $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+    $stok = DB::select($query_stok);
         // dd($makanan);
         // $pesanan = PesananModel::where('user_id', Auth::user()->id)
         //     ->where('status', 0)
@@ -33,7 +41,7 @@ class PesanController extends Controller
         // $total = PesananDetailModel::where('id_pesanan', $pesanan)->count();
 
         // dd($total);
-        return view('public.pesan.index', compact('makanan', 'users'));
+        return view('public.pesan.index', compact('makanan', 'users', 'stok'));
     }
 
     public function update_user(Request $request)

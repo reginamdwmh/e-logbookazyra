@@ -176,6 +176,12 @@
             <p>Laporan Omzet Pertahun</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="/admin/laporan/shift-kas" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Laporan Shift Kas</p>
+          </a>
+        </li>
       </ul>
     </li>
         <li class="nav-item">

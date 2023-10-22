@@ -1,42 +1,81 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-danger navbar-dark">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/dashboard" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/contact" class="nav-link">Contact</a>
-      </li>
-    </ul>
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-book"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+          <li class="nav-item">
+              <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+              <a href="/dashboard" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+              <a href="/contact" class="nav-link">Contact</a>
+          </li>
+          <form method="POST" action="{{ url('/shift/simpanshift') }}">
+              @csrf
+              <?php
+              $date_now = date('Ymd');
+              $kas = \App\Models\ShiftModel::where(DB::raw("DATE_FORMAT(created_at, '%Y%m%d')"), $date_now)
+                  ->where('id_user', Auth::user()->id)
+                  ->get();
+              $kas_old = \App\Models\ShiftModel::where(DB::raw("DATE_FORMAT(created_at, '%Y%m%d')"), $date_now)
+                  ->where('kode_status', 2)
+                  ->orderBy('updated_at', 'desc')
+                  ->get();
+              
+              // if (empty($kas)) {
+              //     dd('a');
+              // }
+              // dd($kas)
+              
+              ?>
+              <li class="nav-item d-none d-sm-inline-block">
+                  @if (sizeof($kas) < 1)
+                      <input type="text" name="kas" value="@currency($kas_old[0]->kas + $kas_old[0]->kas_update)" required readonly>
+                  @else
+                      <input type="text" name="kas" value="@currency($kas[0]->kas + $kas[0]->kas_update)" required readonly>
+                  @endif
+              </li>
+              <li class="nav-item d-none d-sm-inline-block">
+                  @if (sizeof($kas) < 1)
+                      <input type="hidden" name="status" value="1">
+                      <button type="submit" class="btn btn-sm btn-success">Mulai Shift</button>
+                  @elseif(sizeof($kas) < 2)
+                      <input type="hidden" name="status" value="2">
+                      <button type="submit" class="btn btn-sm btn-warning">Akhir Shift</button>
+                  @else
+                  @endif
+                  {{-- <a href="" class="nav-link"></a> --}}
+                  {{-- <a href="/contact" class="nav-link">Akhir Shift</a> --}}
+              </li>
           </form>
-        </div>
-      </li>
+      </ul>
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+          <!-- Navbar Search -->
+          <li class="nav-item">
+              <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                  <i class="fas fa-book"></i>
+              </a>
+              <div class="navbar-search-block">
+                  <form class="form-inline">
+                      <div class="input-group input-group-sm">
+                          <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                              aria-label="Search">
+                          <div class="input-group-append">
+                              <button class="btn btn-navbar" type="submit">
+                                  <i class="fas fa-search"></i>
+                              </button>
+                              <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                  <i class="fas fa-times"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </li>
 
-      {{-- <!-- Messages Dropdown Menu -->
+          {{-- <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
@@ -121,7 +160,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li> --}}
-      {{-- <li class="nav-item">
+          {{-- <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
@@ -131,6 +170,6 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li> --}}
-    </ul>
+      </ul>
   </nav>
   <!-- /.navbar -->

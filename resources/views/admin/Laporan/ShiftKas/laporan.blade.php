@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Data Transaksi Penjualan Makanan Online</title>
+    <title>Data Shift Kas</title>
 </head>
 
 
@@ -27,7 +27,7 @@
     <br>
 
     <div style="text-align: center;">
-        <font size="5"><b>LAPORAN DATA TRANSAKSI PENJUALAN MAKANAN ONLINE</b></font><br>
+        <font size="5"><b>LAPORAN DATA SHIFT KAS</b></font><br>
     </div>
 
     <br>
@@ -38,8 +38,9 @@
                         class="gray-color">{{ $u->name }}</span></font><br>
             @endif
         @endforeach
-        <font style="margin-right: 120px;" size="3">Tanggal Cut Off : {{ tanggal_indo(date('d-m-Y',strtotime($tglawal))) }} s/d
-            {{ tanggal_indo(date('d-m-Y',strtotime($tglakhir))) }} <span class="gray-color"></span></font><br>
+        <font style="margin-right: 120px;" size="3">Tanggal Cut Off :
+            {{ tanggal_indo(date('d-m-Y', strtotime($tglawal))) }} s/d
+            {{ tanggal_indo(date('d-m-Y', strtotime($tglakhir))) }} <span class="gray-color"></span></font><br>
     </div>
     <div style="clear: both;"></div>
     <br>
@@ -48,10 +49,10 @@
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
-                <th>Nama</th>
-                <th>Jenis Pembayaran</th>
-                <th>Pesanan</th>
-                <th>Total</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Jumlah</th>
+
                 @php
                     $total_akhir = 0;
                     $no = 1;
@@ -59,52 +60,39 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($tanggal as $t)
+            @foreach ($tanggal as $key => $sk)
                 <tr>
                     <td>
                         <center>{{ $no++ }}</center>
                     </td>
-                    <td>
-                        
-                        {{ tanggal_indo(date('d-m-Y', strtotime($t->get_pesanandetail[0]->created_at))) }}
-                        
+                    <td>{{ tanggal_indo(date('d-m-Y', strtotime($sk->created_at))) }}&nbsp;{{ date('H:i', strtotime($sk->created_at)) }}
                     </td>
-                    <td>{{ $t->name }}</td>
+                    @foreach ($users as $u)
+                        @if ($u->id == $sk->id_user)
+                            <td>{{ $u->name }}</td>
+                        @endif
+                    @endforeach
                     <td>
-                        <ul>
-                            {{-- @foreach ($t->get_pesanandetail as $tgp)
-                        {{$tgp->jenis_pembayaran}}
-                        @endforeach --}}
-                            {{ $t->get_pesanandetail[0]->jenis_pembayaran }}
-                        </ul>
+                        @if ($sk->kode_status == '1')
+                            <center>Awal Shift</center>
+                        @else
+                            <center>Akhir Shift</center>
+                        @endif
                     </td>
-                    <td>
-                        <ul>
-                            {{-- @foreach ($t->get_pesanandetail as $tgp) --}}
-                            @foreach ($pesanan_detail as $pd)
-                                @if ($pd->id_pesanan == $t->id_pesanan)
-                                    <li>{{ $pd->jumlah }} : {{ $pd->nama_makanan }}</li>
-                                @endif
-                            @endforeach
-                            {{-- @endforeach --}}
-                        </ul>
-                    </td>
-                    @php
-                        $total_akhir += $t->total;
-                    @endphp
                     <td align="right">
-                        @currency($t->total)
+                        @currency($sk->kas)
                     </td>
                 </tr>
             @endforeach
+            @php
+                $total_akhir = $tanggal[$key]->kas + $tanggal[$key]->kas_update;
+            @endphp
             <tr>
 
-                <td colspan="5">
+                <td colspan="4">
                     <center>Total Keseluruhan</center>
                 </td>
-                <td>
-                    <center>Rp.{{ number_format($total_akhir) }}</center>
-                </td>
+                <td align="right">@currency($total_akhir)</td>
 
             </tr>
         </tbody>
@@ -127,6 +115,7 @@
             </p>
         </label>
     </div>
+
 </body>
 
 </html>

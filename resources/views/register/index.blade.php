@@ -47,6 +47,10 @@
                         <input type="text" name="email" class="form-control" placeholder="Email" required>
                     </div>
                     <div class="form-group">
+                        <label>Nomor Handphone</label>
+                        <input type="number" name="nohp" class="form-control" placeholder="Nomor Handphone" required>
+                    </div>
+                    <div class="form-group">
                         <label>Password</label>
                         <input type="password" id="pass" name="password" class="form-control"
                             placeholder="Password" required>

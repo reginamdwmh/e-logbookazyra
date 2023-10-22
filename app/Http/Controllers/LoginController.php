@@ -72,7 +72,15 @@ class LoginController extends Controller
                     ->get();
                 $makanan = MasterDataMakananModel::select('*')
                     ->get();
-                return view('public.index', ['makanan' => $makanan, 'users' => $users]);
+                $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+                $stok = DB::select($query_stok);
+                return view('public.index', ['makanan' => $makanan, 'users' => $users, 'stok' => $stok]);
             }
         }
 
@@ -95,7 +103,15 @@ class LoginController extends Controller
         Alert::success('Success', 'Anda Berhasil Logout');
         $makanan = MasterDataMakananModel::select('*')
             ->get();
-        return view('public.index', ['makanan' => $makanan]);
+        $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+        $stok = DB::select($query_stok);
+        return view('public.index', ['makanan' => $makanan, 'stok' => $stok]);
         // return redirect('/login');
     }
 }

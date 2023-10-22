@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanStokController;
@@ -32,6 +33,8 @@ use App\Http\Controllers\TransaksiPenjualanMakananController;
 use App\Http\Controllers\LaporanDataPenjualanOnlineController;
 use App\Http\Controllers\LaporanPembelianFrozenFoodController;
 use App\Http\Controllers\LaporanDataPenjualanMakananController;
+use App\Http\Controllers\LaporanShiftKasController;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,10 +48,18 @@ use App\Http\Controllers\LaporanDataPenjualanMakananController;
 
 Route::get('/', function () {
     $users = UsersModel::select('*')
-                 ->get();
+        ->get();
     $makanan = MasterDataMakananModel::select('*')
         ->get();
-    return view('public.index', ['makanan' => $makanan,'users' => $users]);
+    $query_stok = "SELECT
+        m.id_makanan,
+        COALESCE(m.id_alat,'') id_alat,
+        CASE WHEN sa.stok_masuk IS NOT NULL THEN sa.stok_masuk - sa.stok_keluar ELSE sff.stok_masuk - sff.stok_keluar END AS stok
+        FROM makanan m
+        LEFT JOIN stok_alat sa ON sa.id_alat = m.id_alat
+        LEFT JOIN stok_frozen_food sff ON sff.id_makanan = m.id_makanan";
+    $stok = DB::select($query_stok);
+    return view('public.index', ['makanan' => $makanan, 'users' => $users, 'stok' => $stok]);
 });
 
 //Route aplikasi
@@ -140,7 +151,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/laporan/data-penjualan-online', [LaporanDataPenjualanOnlineController::class, 'indexlaporanpenjualanonline'])->name('indexlaporanpenjualanonline');
     Route::get('/admin/laporan/data-penjualan-online/cetak/{tglawal}/{tglakhir}', [LaporanDataPenjualanOnlineController::class, 'cetaklaporantransaksipenjualanonline'])->name('cetaklaporantransaksipenjualanonline');
     Route::get('/admin/laporan/data-penjualan-online/detail/{id_pesanan}', [LaporanDataPenjualanOnlineController::class, 'detail_laporan_online'])->name('detail_laporan_online');
-    
+
     //Tabel Laporan Umum
     Route::get('/admin/laporan/data-umum', [LaporanDataUmumController::class, 'indexlaporanumum'])->name('indexlaporanumum');
     Route::get('/admin/laporan/data-umum/cetak/{tglawal}/{tglakhir}', [LaporanDataUmumController::class, 'cetaklaporantransaksiumum'])->name('cetaklaporantransaksiumum');
@@ -160,6 +171,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     // Omzet Pertahun
     Route::get('/admin/laporan/omzet-pertahun', [LaporanOmzetPertahunController::class, 'indexomzetpertahun'])->name('indexomzetpertahun');
     Route::get('/admin/laporan/omzet-pertahun/cetak/{tahun}', [LaporanOmzetPertahunController::class, 'cetakomzerpertahun'])->name('cetakomzerpertahun');
+    Route::get('/admin/laporan/shift-kas', [LaporanShiftKasController::class, 'indexshiftkas'])->name('indexshiftkas');
+    Route::get('/admin/laporan/shift-kas/cetak/{tglawal}/{tglakhir}', [LaporanShiftKasController::class, 'cetakshiftkas'])->name('cetakshiftkas');
 
     // Tabel Laporan Pembelian Frozen Food
     Route::get('/admin/laporan/pembelian-frozen-food', [LaporanPembelianFrozenFoodController::class, 'indexlaporanpembelianfrozenfood'])->name('indexlaporanpembelianfrozenfood');
@@ -187,6 +200,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::get('/absen/hapus/{id}', [AbsenController::class, 'hapusabsen'])->name('hapusabsen');
     Route::get('/absen/cetak', [AbsenController::class, 'cetaklaporanabsen'])->name('cetaklaporanabsen');
 
+    Route::post('/shift/simpanshift', [ShiftController::class, 'simpanshift'])->name('simpanshift');
 
     //Tabel Transaksi Alat
     Route::get('/transaksi/data-alat', [TransaksiAlatController::class, 'indextransaksialat'])->name('indextransaksialat');
@@ -253,7 +267,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     // Tabel Laporan Penjualan Makanan
     Route::get('/laporan/data-penjualan-makanan', [LaporanDataPenjualanMakananController::class, 'indexlaporanpenjualanmakanan'])->name('indexlaporanpenjualanmakanan');
     Route::get('/laporan/data-penjualan-makanan/cetak/{tglawal}/{tglakhir}', [LaporanDataPenjualanMakananController::class, 'cetaklaporantransaksipenjualanmakanan'])->name('cetaklaporantransaksipenjualanmakanan');
-    
+
     // Tabel Laporan Penjualan Online
     Route::get('/laporan/data-penjualan-online', [LaporanDataPenjualanOnlineController::class, 'indexlaporanpenjualanonline'])->name('indexlaporanpenjualanonline');
     Route::get('/laporan/data-penjualan-online/cetak/{tglawal}/{tglakhir}', [LaporanDataPenjualanOnlineController::class, 'cetaklaporantransaksipenjualanonline'])->name('cetaklaporantransaksipenjualanonline');
@@ -262,7 +276,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     //Tabel Laporan Pemesanan Mitra
     Route::get('/laporan/data-pemesanan-mitra', [LaporanDataPemesananMitraController::class, 'indexlaporanpemesananmitra'])->name('indexlaporanpemesananmitra');
     Route::get('/laporan/data-pemesanan-mitra/cetak/{tglawal}/{tglakhir}', [LaporanDataPemesananMitraController::class, 'cetaklaporantransaksipemesananmitra'])->name('cetaklaporantransaksipemesananmitra');
-    
+
     //Tabel Laporan Umum
     Route::get('/laporan/data-umum', [LaporanDataUmumController::class, 'indexlaporanumum'])->name('indexlaporanumum');
     Route::get('/laporan/data-umum/cetak/{tglawal}/{tglakhir}', [LaporanDataUmumController::class, 'cetaklaporantransaksiumum'])->name('cetaklaporantransaksiumum');
